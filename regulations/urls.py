@@ -61,7 +61,7 @@ urlpatterns = [
         ChromePreambleSearchView.as_view(),
         name='chrome_search_preamble',
         kwargs={'doc_type': 'preamble'}),
- 
+
     # Diff view of a section for non-JS viewers (or book markers)
     # Example: http://.../diff/201-4/2011-1738/2013-10704
     url(r'^diff/(?P<label_id>[\d]+[-][\w]+)/(?P<version>[-\d\w_]+)/(?P<newer_version>[-\d\w_]+)$',
@@ -75,7 +75,7 @@ urlpatterns = [
     # Example: http://.../201-3-v/1999/11/8
     url(r'^(?P<label_id>[-\w]+)/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})$',
         redirect_by_date, name='redirect_by_date'),
- 
+
     # Redirect to version by current date
     # Example: http://.../201-3-v/CURRENT
     url(r'^(?P<label_id>[-\w]+)/CURRENT$',
@@ -86,7 +86,7 @@ urlpatterns = [
     url(r'^(?P<label_id>[\d]+[-][\w]+)/(?P<version>[-\d\w_]+)$',
         lt_cache(ChromeView.as_view(partial_class=PartialSectionView)),
         name='chrome_section_view'),
-        
+
     # Subterp, interpretations of a while subpart, emptypart or appendices
     # Example: http://.../201-Subpart-A-Interp/2013-10706
     #          http://.../201-Subpart-Interp/2013-10706
@@ -106,7 +106,7 @@ urlpatterns = [
         lt_cache(ChromeView.as_view(
             partial_class=PartialRegulationView,
             version_switch_view='chrome_regulation_view')),
-         name='chrome_regulation_view'),
+        name='chrome_regulation_view'),
 
     # A regulation paragraph with chrome
     # Example: http://.../201-2-g/2013-10704
