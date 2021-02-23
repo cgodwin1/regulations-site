@@ -7,10 +7,10 @@ from regulations.views import navigation, utils
 from regulations.generator.toc import fetch_toc
 from regulations.generator.section_url import SectionUrl
 from regulations.views import error_handling
-from regulations.views.mixins import SidebarContextMixin
+from regulations.views.mixins import SidebarContextMixin, CitationContextMixin
 
 
-class SectionView(SidebarContextMixin, TemplateView):
+class SectionView(SidebarContextMixin, CitationContextMixin, TemplateView):
 
     template_name = 'regulations/section.html'
 
@@ -26,7 +26,7 @@ class SectionView(SidebarContextMixin, TemplateView):
         version = context['version']
         reg_part = context["part"]
         reg_section = context["section"]
-        label_id = f"{reg_part}-{reg_section}"
+        label_id = context["citation"]
         toc = self.get_toc(reg_part, version)
         meta = utils.regulation_meta(reg_part, version)
         tree = self.get_regulation(label_id, version)
