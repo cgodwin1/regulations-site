@@ -1,7 +1,7 @@
 from django.views.generic.base import TemplateView
 
 from regulations.views.mixins import TableOfContentsMixin
-from regulations.views.reg_landing import regulation_exists, get_versions
+from regulations.views.reg_landing import get_versions
 
 
 class RegulationLandingView(TableOfContentsMixin, TemplateView):

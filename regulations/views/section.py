@@ -4,8 +4,6 @@ from django.http import Http404
 from regulations.generator import api_reader
 from regulations.generator import generator
 from regulations.views import navigation, utils
-from regulations.generator.toc import fetch_toc
-from regulations.generator.section_url import SectionUrl
 from regulations.views import error_handling
 from regulations.views.mixins import SidebarContextMixin, CitationContextMixin, TableOfContentsMixin
 

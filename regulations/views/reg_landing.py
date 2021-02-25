@@ -1,9 +1,5 @@
-from django.http import HttpResponse
-from django.template.loader import select_template
-
 from regulations.generator import api_reader
 from regulations.generator.versions import fetch_grouped_history
-from regulations.views import utils
 
 
 def regulation_exists(label_id):

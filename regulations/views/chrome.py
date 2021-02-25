@@ -9,8 +9,7 @@ from regulations.generator.sidebar.help import Help as HelpSideBar
 from regulations.generator.toc import fetch_toc
 from regulations.generator.versions import fetch_grouped_history
 from regulations.views import utils
-from regulations.views.reg_landing import regulation_exists, get_versions
-from regulations.views.partial import PartialView
+from regulations.views.reg_landing import get_versions
 from regulations.views.partial_search import PartialSearch
 from regulations.views.sidebar import SideBarView
 from regulations.views import error_handling

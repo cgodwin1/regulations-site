@@ -43,6 +43,7 @@ class CitationContextMixin:
             context['citation'] = f"{context['part']}-{context['section']}"
         return context
 
+
 class TableOfContentsMixin:
     def get_toc(self, reg_part, version):
         # table of contents
