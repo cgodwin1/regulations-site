@@ -7,27 +7,27 @@
 
 {% block body %}
 
-<aside class="left-sidebar">
-    {% with nav_class='toc-nav__base toc-nav__cfr-viewer' toc_items=TOC top_toc=True %}
-        {% include "regulations/toc.html" %}
-    {% endwith %}
-</aside>
+<header>
+    {% include "regulations/main-header.html" %}
+</header>
 
-<main>
-    <section>
-        <section>
-            §{{ part }}.
-            <!-- main content fix next -->
-            {% block reg_main_content %}
-            {% endblock %}
-            {% block reg_addtl_content %}
-            {% endblock %}
-        </section>
-    </section>
-</main>
+<div class="box">
 
-<aside class="right-sidebar">
-    {%include "regulations/sidebar.html"%}
-</aside>
+    <aside class="left-sidebar">
+        {% with nav_class='toc-nav__base toc-nav__cfr-viewer' toc_items=TOC top_toc=True %}
+            {% include "regulations/toc.html" %}
+        {% endwith %}
+    </aside>
+
+    {% include content %}
+
+</div>
+
+<footer>
+    <div class="container">
+        <h4>Footer</h4>
+        {% include "regulations/footer.html" %}
+    </div>
+</footer>
 
 {% endblock %}
