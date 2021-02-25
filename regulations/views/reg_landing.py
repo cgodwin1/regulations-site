@@ -25,25 +25,3 @@ def get_versions(label_id):
         current = [h for h in history if h['timeline'].is_present()]
         current_version = current[0]
         return (current_version, next_version)
-
-
-def regulation(request, label_id):
-    context = {}
-    current_version, new_version = get_versions(label_id)
-    if new_version:
-        context['new_version'] = new_version
-    context['current_version'] = current_version
-
-    context['label_id'] = label_id
-    context['reg_first_section'] = utils.first_section(
-        label_id, current_version['version'])
-    context['reg_part'] = label_id.split('-')[0]
-
-    context['meta'] = utils.regulation_meta(label_id,
-                                            current_version['version'])
-
-    t = select_template([
-        'regulations/landing_%s.html' % label_id,
-        'regulations/landing_base.html',
-        'regulations/generic_landing.html'])
-    return HttpResponse(t.render(context, request))
