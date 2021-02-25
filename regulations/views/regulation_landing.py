@@ -6,7 +6,7 @@ from regulations.views.reg_landing import get_versions
 
 class RegulationLandingView(TableOfContentsMixin, TemplateView):
 
-    template_name = "regulations/generic_landing.html"
+    template_name = "regulations/regulation_landing.html"
 
     sectional_links = True
 
