@@ -5,7 +5,7 @@ from regulations.generator.versions import Timeline, get_versions
 
 
 class LandingViewTest(TestCase):
-    @patch('regulations.views.reg_landing.fetch_grouped_history')
+    @patch('regulations.generator.versions.fetch_grouped_history')
     def test_get_versions(self, fetch_grouped_history):
         fetch_grouped_history.return_value = [
             {'timeline': Timeline.future, 'version': 'a'},
@@ -16,7 +16,7 @@ class LandingViewTest(TestCase):
         self.assertEqual({'timeline': Timeline.future, 'version': 'a'},
                          next_ver)
 
-    @patch('regulations.views.reg_landing.fetch_grouped_history')
+    @patch('regulations.generator.versions.fetch_grouped_history')
     def test_get_versions_no_next(self, fetch_grouped_history):
         fetch_grouped_history.return_value = [
             {'timeline': Timeline.present, 'version': 'b'}]
