@@ -3,6 +3,7 @@ from mock import patch
 
 from regulations.generator.versions import Timeline, get_versions
 
+
 class LandingViewTest(TestCase):
     @patch('regulations.views.reg_landing.fetch_grouped_history')
     def test_get_versions(self, fetch_grouped_history):
