@@ -1,9 +1,6 @@
 {% extends "regulations/base.html" %}
 {% load static %}
 
-{% comment %}
-    Replaces application's loaded scripts and styles with just styles.
-{% endcomment %}
 {% block app_js %}
         {% if EREGS_GLOBALS.ENV == 'built' %}
         <link rel="stylesheet" href="{%static "regulations/css/regulations.min.css" %}"/>
@@ -14,10 +11,6 @@
         {% endblock %}
 {% endblock %}
 
-{% comment %}
-    Universal application landing page
-{% endcomment %}
-
 {% block title %}eRegulations{% endblock %}
 
 {% block body %}
@@ -27,31 +20,24 @@
 
 <div class="landing-content">
 
-{% block hero %}
 <div class="hero">
     <div class="inner-wrap group">
       <div class="primary">
         <h2 class="hero-header">A platform to read regulations.</h2>
         <p class="hero-text">eRegulations makes regulations easier to find, read, and understand.</p>
-
-        <p class="read-more-link"><a href="{% url 'about' %}" class="go">About eRegulations</a></p>
       </div>
-    </div> <!-- /.inner-wrap -->
-</div> <!-- /.hero -->
-{% endblock %}
+    </div>
+</div>
 
 <div class="landing-main" role="main">
   <div class="inner-wrap">
 
     <div class="group">
       <div class="content-primary column-l bump">
-        {% block regulations-title %}
         <h2 class="small-header light-header">
-            {% block cfr_title %}Title {{cfr_title_number|upper}} {{cfr_title_text}}{% endblock %}
+            Title {{cfr_title_number|upper}} {{cfr_title_text}}
         </h2>
-        {% endblock %}
 
-        {% block reg-list %}
         <ul class="reg-list">
             {% for regulation in regulations %}
                 <li>
@@ -77,40 +63,23 @@
                 </li>
             {% endfor %}
         </ul>
-        {% endblock %}
+      </div>
+    </div> 
 
-        {% block moreregulations %}
-        {% endblock %}
-      </div> <!-- /.primary -->
+    <section class="about bump group">
+      <h2 class="light-header">About eRegulations</h2>
+      <div class="content-primary column-l">
 
-        {% block secondcolumn_notices %}
-        {% endblock %}
-    </div> <!-- /.group -->
+        <p>eRegulations is a web-based tool that makes regulations easier
+        to find, read and understand with features such as inline
+        official interpretations, highlighted defined terms, and a
+        revision comparison view.</p>
+      </div>
+    </section>
+  </div>
+</div>
 
-      {% block about-eregs %}
-      <section class="about bump group">
-        <h2 class="light-header">About eRegulations</h2>
-        <div class="content-primary column-l">
-
-          <p>eRegulations is a web-based tool that makes regulations easier
-          to find, read and understand with features such as inline
-          official interpretations, highlighted defined terms, and a
-          revision comparison view.</p>
-
-          <p><a href="{% url 'about' %}" class="go">Learn more about eRegulations&#8217; features</a></p>
-        </div> <!-- /.primart -->
-
-        {% block orgcontact %}
-        {% endblock %}
-
-        {% block legal %}
-        {% endblock %}
-      </section> <!-- /.about -->
-      {% endblock %}
-  </div> <!-- /.inner-wrap -->
-</div> <!-- /.landing-main -->
-
-</div> <!-- /.landing-content -->
+</div>
 
 {% include "regulations/full_footer.html" %}
 
