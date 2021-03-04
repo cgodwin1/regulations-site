@@ -1,84 +1,59 @@
 {% extends "regulations/base.html" %}
 {% load static %}
-
+{% load macros %}
 {% block app_js %}
-        {% if EREGS_GLOBALS.ENV == 'built' %}
-        <link rel="stylesheet" href="{%static "regulations/css/regulations.min.css" %}"/>
-        {% else %}
-        <link rel="stylesheet" href="{%static "regulations/css/style.css" %}"/>
-        {% endif %}
+<link rel="stylesheet" href="{% static 'main/css/main.css' %}"/>
 {% endblock %}
 
 {% block title %}eRegulations{% endblock %}
 
 {% block body %}
 
-<header id="site-header" class="reg-header site-homepage">
+<header>
     {% include "regulations/main-header.html" %}
 </header>
 
-<div class="landing-content">
+<section>
+  <h2>A platform to read regulations.</h2>
+  <p>eRegulations makes regulations easier to find, read, and understand.</p>
+</section>
 
-<div class="hero">
-    <div class="inner-wrap group">
-      <div class="primary">
-        <h2 class="hero-header">A platform to read regulations.</h2>
-        <p class="hero-text">eRegulations makes regulations easier to find, read, and understand.</p>
-      </div>
-    </div>
-</div>
+<section>
+  <h2>
+    Title {{cfr_title_number|upper}} {{cfr_title_text}}
+  </h2>
+  
+  <ul>
+    {% for regulation in regulations %}
+    <li>
+      <a href="{% url 'regulation_landing_view' regulation.part %}">
+        {{regulation.part}}
+        <span>
+          {% if regulation.meta.reg_letter %}
+            Regulation {{regulation.meta.reg_letter}}
+            {{regulation.meta.statutory_name|title}}
+          {% else %}
+            {{regulation.meta.statutory_name|title}}
+          {% endif %}
+        </span>
+      </a>
 
-<div class="landing-main" role="main">
-  <div class="inner-wrap">
+      {% for amendment in regulation.amendments %}
+        <div>
+          New amendment effective {{amendment.by_date|date:'n/j/Y'}}
+          <a href="{% url 'reader_view' regulation.part regulation.reg_first_section amendment.version %}">View new amendment</a>
+        </div>
+      {% endfor %}
+    </li>
+    {% endfor %}
+  </ul>
+</section> 
 
-    <div class="group">
-      <div class="content-primary column-l bump">
-        <h2 class="small-header light-header">
-            Title {{cfr_title_number|upper}} {{cfr_title_text}}
-        </h2>
-
-        <ul class="reg-list">
-            {% for regulation in regulations %}
-                <li>
-                    <a href="{% url 'regulation_landing_view' regulation.part %}">
-                        <span class="title-num">{{regulation.part}}</span>
-                        <div class="reg-sub-title">
-                            {% if regulation.meta.reg_letter %}
-                                <span class="reg-major-text">Regulation {{regulation.meta.reg_letter}}</span>
-                                <span class="reg-title">{{regulation.meta.statutory_name|title}}</span>
-                            {% else %}
-                                <span class="reg-major-text">{{regulation.meta.statutory_name|title}}</span>
-                            {% endif %}
-                        </div>
-                        <span class="cf-icon cf-icon-right-round"></span>
-                    </a>
-
-                    {% for amendment in regulation.amendments %}
-                        <div class="mini-alert important">
-                            New amendment effective {{amendment.by_date|date:'n/j/Y'}}
-                            <a href="{% url 'reader_view' regulation.part regulation.reg_first_section amendment.version %}" class="go">View new amendment</a>
-                        </div>
-                    {% endfor %}
-                </li>
-            {% endfor %}
-        </ul>
-      </div>
-    </div> 
-
-    <section class="about bump group">
-      <h2 class="light-header">About eRegulations</h2>
-      <div class="content-primary column-l">
-
-        <p>eRegulations is a web-based tool that makes regulations easier
-        to find, read and understand with features such as inline
-        official interpretations, highlighted defined terms, and a
-        revision comparison view.</p>
-      </div>
-    </section>
-  </div>
-</div>
-
-</div>
+<section>
+  <h2>About eRegulations</h2>
+  <p>eRegulations is a web-based tool that makes regulations easier to find, read and understand with features such as inline
+    official interpretations, highlighted defined terms, and a revision comparison view.</p>
+</section>
 
 {% include "regulations/full_footer.html" %}
 
