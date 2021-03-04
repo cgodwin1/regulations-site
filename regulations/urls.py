@@ -25,8 +25,8 @@ from regulations.views.redirect import (
     redirect_by_date_get
 )
 from regulations.views.sidebar import SideBarView
-from regulations.views.universal_landing import universal
 from regulations.views.regulation_landing import RegulationLandingView
+from regulations.views.homepage import HomepageView
 
 # Reusable pattern matching constants to improve readability
 match_version = match_notice = r'[-\d\w_]+'
@@ -43,7 +43,7 @@ match_sub_interp = r'[\d]+-(Appendices|Subpart(-[A-Z]+)?)-Interp'
 urlpatterns = [
     # Index page
     # Example http://.../
-    url(rf'^$', universal, name='universal_landing'),
+    path('', HomepageView.as_view(), name='homepage'),
 
     # About page
     # Example http://.../about
