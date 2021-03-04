@@ -35,10 +35,12 @@ class HomepageView(TemplateView):
             first_section = utils.first_section(part, version)
             amendments = self.filter_future_amendments(all_versions.get(part, None))
 
-            reg = {'part': part,
+            reg = {
+                'part': part,
                 'meta': reg_meta,
                 'reg_first_section': first_section,
-                'amendments': amendments}
+                'amendments': amendments
+            }
 
             regs.append(reg)
         return regs
