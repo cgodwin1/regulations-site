@@ -5,6 +5,7 @@ from django.views.generic.base import TemplateView
 from regulations.views import utils
 from regulations.generator import versions
 
+
 def get_regulations_list(all_versions):
     regs = []
     reg_parts = sorted(all_versions.keys(), key=utils.make_sortable)
