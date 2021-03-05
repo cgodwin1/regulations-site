@@ -16,5 +16,6 @@ class SubpartConverter(PathConverter):
     def to_python(self, value):
         return value[0].upper() + value[1:-1] + value[-1].upper()
 
+
 class VersionConverter(PathConverter):
     regex = r'[\d\w]+-[\d\w]+'
