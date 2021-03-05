@@ -21,7 +21,7 @@ def internalcitation(value, arg):
             try:
                 # /433/section/112#433-112-c
                 url = reverse("section_reader_view",
-                    args=[*citation["citation"][:2], version]) + "#" + "-".join(citation["citation"])
+                                args=[*citation["citation"][:2], version]) + "#" + "-".join(citation["citation"])
                 context = {
                     "citation": citation["citation"],
                     "original": original,
