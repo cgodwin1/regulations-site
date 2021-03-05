@@ -1,28 +1,20 @@
-class PartConverter:
-    regex = '[\d]+'
-
+class PathConverter:
     def to_python(self, value):
-        return f"{value}"
+        return value
 
     def to_url(self, value):
-        return f"{value}"
+        return value
 
 
-class SectionConverter:
-    regex = '[\d]+'
-
-    def to_python(self, value):
-        return f"{value}"
-
-    def to_url(self, value):
-        return f"{value}"
+class NumericConverter(PathConverter):
+    regex = r'[\d]+'
 
 
-class SubpartConverter:
-    regex = '[Ss]ubpart-[A-Za-z]'
+class SubpartConverter(PathConverter):
+    regex = r'[Ss]ubpart-[A-Za-z]'
 
     def to_python(self, value):
         return value[0].upper() + value[1:-1] + value[-1].upper()
 
-    def to_url(self, value):
-        return value[0].upper() + value[1:-1] + value[-1].upper()
+class VersionConverter(PathConverter):
+    regex = r'[\d\w]+-[\d\w]+'

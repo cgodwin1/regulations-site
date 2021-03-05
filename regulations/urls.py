@@ -41,9 +41,9 @@ match_day = match_month = r'\d{2}'
 match_interp = r'[-\w]+[-]Interp'
 match_sub_interp = r'[\d]+-(Appendices|Subpart(-[A-Z]+)?)-Interp'
 
-register_converter(converters.PartConverter, 'part')
-register_converter(converters.SectionConverter, 'section')
+register_converter(converters.NumericConverter, 'numeric')
 register_converter(converters.SubpartConverter, 'subpart')
+register_converter(converters.VersionConverter, 'version')
 
 urlpatterns = [
     # Index page
@@ -99,9 +99,9 @@ urlpatterns = [
     url(rf'^(?P<label_id>{match_paragraph})/CURRENT$',
         redirect_by_current_date, name='redirect_by_current_date'),
 
-    path('<part:part>/<version>/', ReaderView.as_view(), name='reader_view'),
-    path('<part:part>/<section:section>/<version>/', ReaderView.as_view(), name='reader_view'),
-    path('<part:part>/<subpart:subpart>/<version>/', SubpartReaderView.as_view(), name="subpart_reader_view"),
+    path('<numeric:part>/<version:version>/', ReaderView.as_view(), name='reader_view'),
+    path('<numeric:part>/<numeric:section>/<version:version>/', ReaderView.as_view(), name='reader_view'),
+    path('<numeric:part>/<subpart:subpart>/<version:version>/', SubpartReaderView.as_view(), name="subpart_reader_view"),
 
     # Interpretation of a section/paragraph or appendix
     # Example: http://.../201-4-Interp/2013-10704
