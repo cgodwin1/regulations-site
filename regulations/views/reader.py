@@ -61,7 +61,19 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
                     'page_type': 'reg-section'}
 
 
+class PartReaderView(ReaderView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
 class SubpartReaderView(ReaderView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+class SectionReaderView(ReaderView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
