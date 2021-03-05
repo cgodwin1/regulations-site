@@ -59,3 +59,9 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
             p_sect, n_sect = nav_sections
             return {'previous': p_sect, 'next': n_sect,
                     'page_type': 'reg-section'}
+
+
+class SubpartReaderView(ReaderView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
