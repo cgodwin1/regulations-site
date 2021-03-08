@@ -76,6 +76,13 @@ def find_subpart(section, toc, subpart=None):
     return None
 
 
+def find_subpart_first_section(subpart, toc):
+    for el in toc:
+        if subpart.lower() == '-'.join(el['index'][1:]).lower():
+            return el['sub_toc'][0]['index'][1]
+    return None
+
+
 def make_sortable(string):
     """Split a string into components, converting digits into ints so sorting
     works as we would expect"""

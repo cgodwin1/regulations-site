@@ -83,10 +83,21 @@ class PartReaderView(ReaderView):
 class SubpartReaderView(ReaderView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        part = context['part']
+        version = context['version']
+        subpart = context['subpart']
+
+        section = utils.find_subpart_first_section(subpart, context['TOC'])
+        if section is None:
+            section = utils.first_section(part, version)
+
+        citation = part + '-' + section
+
         c = {
-            'part_view_link': reverse('part_reader_view', args=()),
+            'part_view_link': reverse('part_reader_view', args=(part, version)) + '#' + citation,
             'subpart_view_link': '#',
-            'section_view_link': reverse('section_reader_view', args=()),
+            'section_view_link': reverse('section_reader_view', args=(part, section, version)),
         }
         return {**context, **c}
 
