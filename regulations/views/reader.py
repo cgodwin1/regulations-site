@@ -1,5 +1,6 @@
 from django.views.generic.base import TemplateView
 from django.http import Http404
+from django.urls import reverse
 
 from regulations.generator import api_reader
 from regulations.generator import generator
@@ -64,16 +65,48 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
 class PartReaderView(ReaderView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        return context
+
+        part = context['part']
+        version = context['version']
+        first_section = utils.first_section(part, version)
+        first_subpart = utils.first_subpart(part, version)
+
+        c = {
+            'part_view_link': '#',
+            'subpart_view_link': reverse('subpart_reader_view', args=(part, first_subpart, version)),
+            'section_view_link': reverse('section_reader_view', args=(part, first_section, version)),
+        }
+
+        return {**context, **c}
 
 
 class SubpartReaderView(ReaderView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        return context
+        c = {
+            'part_view_link': reverse('part_reader_view', args=()),
+            'subpart_view_link': '#',
+            'section_view_link': reverse('section_reader_view', args=()),
+        }
+        return {**context, **c}
 
 
 class SectionReaderView(ReaderView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        return context
+
+        part = context['part']
+        section = context['section']
+        version = context['version']
+        citation = context['citation']
+
+        subpart = utils.find_subpart(section, context['TOC'])
+        if subpart is None:
+            subpart = utils.first_subpart(part, version)
+
+        c = {
+            'part_view_link': reverse('part_reader_view', args=(part, version)) + '#' + citation,
+            'subpart_view_link': reverse('subpart_reader_view', args=(part, subpart, version)) + '#' + citation,
+            'section_view_link': '#',
+        }
+        return {**context, **c}
