@@ -77,18 +77,16 @@ class TableOfContentsMixin:
 
     def get_url(self, citation, version, subpart):
         view_name = self.request.resolver_match.url_name
+        part = citation[0]
+        section = citation[1]
 
         if view_name == "subpart_reader_view" and subpart is not None:
-            part = citation[0]
             view = view_name
             args = (part, subpart, version)
         elif view_name == "part_reader_view":
-            part = citation[0]
             view = view_name
             args = (part, version)
         else:
-            part = citation[0]
-            section = citation[1]
             view = self.default_view
             args = (part, section, version)
 
