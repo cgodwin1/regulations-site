@@ -72,7 +72,6 @@ class PartReaderView(ReaderView):
         first_subpart = utils.first_subpart(part, version)
 
         c = {
-            'part_view_link': '#',
             'subpart_view_link': reverse('subpart_reader_view', args=(part, first_subpart, version)),
             'section_view_link': reverse('section_reader_view', args=(part, first_section, version)),
         }
@@ -96,7 +95,6 @@ class SubpartReaderView(ReaderView):
 
         c = {
             'part_view_link': reverse('part_reader_view', args=(part, version)) + '#' + citation,
-            'subpart_view_link': '#',
             'section_view_link': reverse('section_reader_view', args=(part, section, version)),
         }
         return {**context, **c}
@@ -118,6 +116,5 @@ class SectionReaderView(ReaderView):
         c = {
             'part_view_link': reverse('part_reader_view', args=(part, version)) + '#' + citation,
             'subpart_view_link': reverse('subpart_reader_view', args=(part, subpart, version)) + '#' + citation,
-            'section_view_link': '#',
         }
         return {**context, **c}
