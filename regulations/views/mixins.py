@@ -7,8 +7,6 @@ from django.urls import reverse, NoReverseMatch
 from regulations.generator import api_reader
 from regulations.generator.toc import fetch_toc
 from regulations.generator.section_url import SectionUrl
-import logging
-logger = logging.getLogger(__name__)
 
 
 def build_citation(context):
@@ -91,6 +89,6 @@ class TableOfContentsMixin:
             args = (part, section, version)
 
         try:
-            return reverse(view, args=args)
+            return reverse(view, args=args) + '#' + part + '-' + section
         except NoReverseMatch:
             return ''
