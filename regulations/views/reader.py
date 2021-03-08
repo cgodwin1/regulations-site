@@ -24,7 +24,7 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         reg_version = context["version"]
         reg_part = context["part"]
         reg_citation = context["citation"]
-        toc = self.get_toc(reg_part, reg_version)
+        toc = self.get_toc(context['part'], context['version'])
         meta = utils.regulation_meta(reg_part, reg_version)
         tree = self.get_regulation(reg_citation, reg_version)
 
@@ -32,11 +32,11 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
             raise error_handling.MissingContentException()
 
         c = {
-            'tree':                 tree,
-            'navigation':           self.get_neighboring_sections(reg_citation, reg_version),
-            'reg_part':             reg_part,
-            'TOC':                  toc,
-            'meta':                 meta,
+            'tree':         tree,
+            'navigation':   self.get_neighboring_sections(reg_citation, reg_version),
+            'reg_part':     reg_part,
+            'meta':         meta,
+            'TOC':          toc,
         }
 
         return {**context, **c}

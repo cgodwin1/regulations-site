@@ -2,10 +2,13 @@ from importlib import import_module
 
 import six
 from django.conf import settings
+from django.urls import reverse, NoReverseMatch
 
 from regulations.generator import api_reader
 from regulations.generator.toc import fetch_toc
 from regulations.generator.section_url import SectionUrl
+import logging
+logger = logging.getLogger(__name__)
 
 
 def build_citation(context):
@@ -55,15 +58,41 @@ class SidebarContextMixin():
 
 
 class TableOfContentsMixin:
+    default_view = 'section_reader_view'
+
     def get_toc(self, reg_part, version):
         # table of contents
         toc = fetch_toc(reg_part, version)
         self.build_urls(toc, version)
         return toc
 
-    def build_urls(self, toc, version):
+    def build_urls(self, toc, version, subpart=None):
         for el in toc:
-            el['url'] = SectionUrl().of(
-                el['index'], version, self.sectional_links)
+            el['url'] = self.get_url(el['index'], version, subpart)
             if 'sub_toc' in el:
-                self.build_urls(el['sub_toc'], version)
+                if 'Subpart' in el['index']:
+                    self.build_urls(el['sub_toc'], version, '-'.join(el['index'][1:]))
+                else:
+                    self.build_urls(el['sub_toc'], version)
+
+    def get_url(self, citation, version, subpart):
+        view_name = self.request.resolver_match.url_name
+
+        if view_name == "subpart_reader_view" and subpart is not None:
+            part = citation[0]
+            view = view_name
+            args = (part, subpart, version)
+        elif view_name == "part_reader_view":
+            part = citation[0]
+            view = view_name
+            args = (part, version)
+        else:
+            part = citation[0]
+            section = citation[1]
+            view = self.default_view
+            args = (part, section, version)
+
+        try:
+            return reverse(view, args=args)
+        except NoReverseMatch:
+            return ''
