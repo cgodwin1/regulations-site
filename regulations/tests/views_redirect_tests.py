@@ -94,7 +94,7 @@ class ViewsRedirectTest(TestCase):
 
     def test_diff_redirect_bad_version(self):
         request = RequestFactory().get('?new_version=A+Bad+Version')
-        response = redirect.diff_redirect(request, 'lablab', 'verver')
+        response = redirect.diff_redirect(request, 'lablab', 'ver-ver')
         self.assertEqual(404, response.status_code)
 
     @patch('regulations.views.redirect.fetch_grouped_history')
