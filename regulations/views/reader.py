@@ -97,7 +97,7 @@ class SubpartReaderView(ReaderView):
             'part_view_link': reverse('part_reader_view', args=(part, version)) + '#' + citation,
             'section_view_link': reverse('section_reader_view', args=(part, section, version)),
         }
-    
+
     def build_toc_url(self, part, subpart, section, version):
         return reverse('subpart_reader_view', args=(part, subpart, version))
 

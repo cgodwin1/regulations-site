@@ -6,7 +6,6 @@ from django.urls import reverse, NoReverseMatch
 
 from regulations.generator import api_reader
 from regulations.generator.toc import fetch_toc
-from regulations.generator.section_url import SectionUrl
 
 
 def build_citation(context):
@@ -15,7 +14,7 @@ def build_citation(context):
             citation.append(context["part"])
         else:
             return []
-            
+
         if 'section' in context:
             citation.append(context["section"])
         elif 'subpart' in context:
