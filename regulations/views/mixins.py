@@ -66,29 +66,18 @@ class TableOfContentsMixin:
 
     def build_urls(self, toc, version, subpart=None):
         for el in toc:
-            el['url'] = self.get_url(el['index'], version, subpart)
+            try:
+                part = el['index'][0]
+                section = el['index'][1]
+                el['url'] = self.build_toc_url(part, subpart, section, version) + '#' + part + '-' + section
+            except NoReverseMatch:
+                el['url'] = ''
+
             if 'sub_toc' in el:
                 if 'Subpart' in el['index']:
                     self.build_urls(el['sub_toc'], version, '-'.join(el['index'][1:]))
                 else:
                     self.build_urls(el['sub_toc'], version)
 
-    def get_url(self, citation, version, subpart):
-        view_name = self.request.resolver_match.url_name
-        part = citation[0]
-        section = citation[1]
-
-        if view_name == "subpart_reader_view" and subpart is not None:
-            view = view_name
-            args = (part, subpart, version)
-        elif view_name == "part_reader_view":
-            view = view_name
-            args = (part, version)
-        else:
-            view = self.default_view
-            args = (part, section, version)
-
-        try:
-            return reverse(view, args=args) + '#' + part + '-' + section
-        except NoReverseMatch:
-            return ''
+    def build_toc_url(self, part, subpart, section, version):
+        return reverse(self.default_view, args=(part, section, version))

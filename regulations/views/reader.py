@@ -40,7 +40,7 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
             'TOC':          toc,
         }
 
-        links = self.get_view_links(context)
+        links = self.get_view_links(context, toc)
 
         return {**context, **c, **links}
 
@@ -63,12 +63,12 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
             return {'previous': p_sect, 'next': n_sect,
                     'page_type': 'reg-section'}
 
-    def get_view_links(self, context):
+    def get_view_links(self, context, toc):
         raise NotImplementedError()
 
 
 class PartReaderView(ReaderView):
-    def get_view_links(self, context):
+    def get_view_links(self, context, toc):
         part = context['part']
         version = context['version']
         first_section = utils.first_section(part, version)
@@ -79,13 +79,16 @@ class PartReaderView(ReaderView):
             'section_view_link': reverse('section_reader_view', args=(part, first_section, version)),
         }
 
+    def build_toc_url(self, part, subpart, section, version):
+        return reverse('part_reader_view', args=(part, version))
+
 
 class SubpartReaderView(ReaderView):
-    def get_view_links(self, context):
+    def get_view_links(self, context, toc):
         part = context['part']
         version = context['version']
         subpart = context['subpart']
-        section = utils.find_subpart_first_section(subpart, context['TOC'])
+        section = utils.find_subpart_first_section(subpart, toc)
         if section is None:
             section = utils.first_section(part, version)
         citation = part + '-' + section
@@ -94,15 +97,18 @@ class SubpartReaderView(ReaderView):
             'part_view_link': reverse('part_reader_view', args=(part, version)) + '#' + citation,
             'section_view_link': reverse('section_reader_view', args=(part, section, version)),
         }
+    
+    def build_toc_url(self, part, subpart, section, version):
+        return reverse('subpart_reader_view', args=(part, subpart, version))
 
 
 class SectionReaderView(ReaderView):
-    def get_view_links(self, context):
+    def get_view_links(self, context, toc):
         part = context['part']
         section = context['section']
         version = context['version']
         citation = context['citation']
-        subpart = utils.find_subpart(section, context['TOC'])
+        subpart = utils.find_subpart(section, toc)
         if subpart is None:
             subpart = utils.first_subpart(part, version)
 
