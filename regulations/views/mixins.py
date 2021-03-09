@@ -13,9 +13,12 @@ def build_citation(context):
         citation = []
         if 'part' in context:
             citation.append(context["part"])
+        else:
+            return []
+            
         if 'section' in context:
             citation.append(context["section"])
-        if 'subpart' in context:
+        elif 'subpart' in context:
             citation.append(context["subpart"])
         return "-".join(citation)
 
