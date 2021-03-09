@@ -56,8 +56,7 @@ class AnalysesSidebarTests(TestCase):
         self.client.regulation.return_value = {
             "label": ['111', '22', 'Interp']}
         self.assertEqual(
-            analyses.Analyses('111-22-Interp', 'ver-ver').context(self.client,
-                                                              None),
+            analyses.Analyses('111-22-Interp', 'ver-ver').context(self.client, None),
             {'version': 'ver-ver',
              'human_label_id': 'Supplement to 111.22',
              'analyses': [
@@ -71,8 +70,7 @@ class AnalysesSidebarTests(TestCase):
         self.client.regulation.return_value = {
             "label": ['111', '22', 'Interp', '2']}
         self.assertEqual(
-            analyses.Analyses('111-22-Interp-2', 'ver-ver').context(self.client,
-                                                                None),
+            analyses.Analyses('111-22-Interp-2', 'ver-ver').context(self.client, None),
             {'version': 'ver-ver',
              'human_label_id': 'Supplement to 111.22-2',
              'analyses': [
