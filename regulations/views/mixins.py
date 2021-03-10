@@ -9,17 +9,14 @@ from regulations.generator.toc import fetch_toc
 
 
 def build_citation(context):
-        citation = []
-        if 'part' in context:
-            citation.append(context["part"])
-        else:
-            return []
-
+    citation = []
+    if 'part' in context:
+        citation.append(context["part"])
         if 'section' in context:
             citation.append(context["section"])
         elif 'subpart' in context:
             citation.append(context["subpart"])
-        return "-".join(citation)
+    return "-".join(citation)
 
 
 class CitationContextMixin:
