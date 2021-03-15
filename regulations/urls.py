@@ -2,9 +2,7 @@ from django.urls import path, register_converter
 from django.conf.urls import url
 
 from regulations.url_caches import daily_cache, lt_cache
-from regulations.views.chrome import (
-    ChromeView,
-    ChromeSearchView)
+from regulations.views.chrome import ChromeView
 from regulations.views.diff import ChromeSectionDiffView
 from regulations.views.diff import PartialSectionDiffView
 from regulations.views.partial import PartialDefinitionView
@@ -13,9 +11,7 @@ from regulations.views.reader import SubpartReaderView, SectionReaderView, PartR
 from regulations.views import partial_interp
 from regulations.views.partial_search import PartialSearch
 from regulations.views.partial_sxs import ParagraphSXSView
-from regulations.views.preamble import (
-    CFRChangesView, PreambleView, ChromePreambleSearchView
-)
+from regulations.views.preamble import CFRChangesView, PreambleView
 from regulations.views.goto import GoToRedirectView
 from regulations.views.redirect import (
     diff_redirect,
@@ -56,17 +52,6 @@ urlpatterns = [
     # Example http://.../diff_redirect/201-3/old_version?new_version=new
     url(rf'^diff_redirect/(?P<label_id>{match_section})/(?P<version>{match_version})$',
         diff_redirect, name='diff_redirect'),
-
-    # Search results for non-JS viewers
-    # Example: http://.../search?q=term&version=2011-1738
-    url(rf'^search(?:/cfr)?/(?P<label_id>{match_reg})$',
-        ChromeSearchView.as_view(),
-        name='chrome_search',
-        kwargs={'doc_type': 'cfr'}),
-    url(rf'^search/preamble/(?P<label_id>{match_preamble})$',
-        ChromePreambleSearchView.as_view(),
-        name='chrome_search_preamble',
-        kwargs={'doc_type': 'preamble'}),
 
     # Diff view of a section for non-JS viewers (or book markers)
     # Example: http://.../diff/201-4/2011-1738/2013-10704

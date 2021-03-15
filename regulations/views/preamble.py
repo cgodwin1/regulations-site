@@ -220,26 +220,6 @@ class PreambleView(View):
                                 context=context)
 
 
-class ChromePreambleSearchView(chrome.ChromeSearchView):
-    template_name = 'regulations/chrome-preamble-search.html'
-
-    def get_context_data(self, **kwargs):
-        label_parts = kwargs.get('label_id', '').split('/')
-        doc_number = label_parts[0]
-        context = common_context(doc_number)
-        context['doc_type'] = 'preamble'
-        context['label_id'] = kwargs.get('label_id', '')
-
-        subtree = find_subtree(context['preamble'], label_parts)
-        if subtree is None:
-            raise Http404
-
-        context.update(generate_html_tree(context['preamble'], self.request,
-                                          id_prefix=[doc_number, 'preamble']))
-        self.add_main_content(context)
-        return context
-
-
 SubpartInfo = namedtuple('SubpartInfo', ['letter', 'title', 'urls', 'idx'])
 
 

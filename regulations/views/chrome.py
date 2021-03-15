@@ -148,33 +148,6 @@ class ChromeView(TemplateView):
         return response.content.decode('utf-8')
 
 
-class ChromeSearchView(ChromeView):
-    """Search results with chrome"""
-    template_name = 'regulations/chrome-search.html'
-    partial_class = PartialSearch
-    sidebar_components = [HelpSideBar]
-
-    def check_tree(self, context):
-        pass    # Search doesn't perform this check
-
-    def fill_kwargs(self, kwargs):
-        """Get the version for the chrome context"""
-        kwargs['version'] = self.request.GET.get('version', '')
-        kwargs['skip_count'] = True
-        if not kwargs['version']:
-            current, _ = get_versions(kwargs['label_id'])
-            kwargs['version'] = current['version']
-        kwargs['label_id'] = utils.first_section(kwargs['label_id'],
-                                                 kwargs['version'])
-        return kwargs
-
-    def add_main_content(self, context):
-        """Override this so that we have access to the main content's
-        results field"""
-        super(ChromeSearchView, self).add_main_content(context)
-        context['results'] = context['main_content_context']['results']
-
-
 class BadComponentException(Exception):
     """Allows us to propagate errors in loaded partials"""
     def __init__(self, response):
