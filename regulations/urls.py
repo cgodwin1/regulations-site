@@ -2,7 +2,6 @@ from django.urls import path, register_converter
 from django.conf.urls import url
 
 from regulations.url_caches import daily_cache, lt_cache
-from regulations.views.chrome import ChromeView
 from regulations.views.diff import PartialSectionDiffView
 from regulations.views.partial import PartialDefinitionView
 from regulations.views.partial import PartialRegulationView
@@ -74,11 +73,6 @@ urlpatterns = [
     path('<numeric:part>/<subpart:subpart>/<version:version>/', SubpartReaderView.as_view(), name="subpart_reader_view"),
 
     path('goto/', GoToRedirectView.as_view(), name='goto'),
-    # Interpretation of a section/paragraph or appendix
-    # Example: http://.../201-4-Interp/2013-10704
-    url(rf'^(?P<label_id>{match_interp})/(?P<version>{match_version})$',
-        lt_cache(ChromeView.as_view(partial_class=partial_interp.PartialInterpView)),
-        name='chrome_interp_view'),
 
     # A regulation landing page
     # Example: http://.../201

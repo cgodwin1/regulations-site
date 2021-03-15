@@ -12,7 +12,6 @@ from regulations.generator.section_url import SectionUrl
 from regulations.generator.sidebar.diff_help import DiffHelp
 from regulations.generator.toc import fetch_toc
 from regulations.views import error_handling, utils
-from regulations.views.chrome import ChromeView
 from regulations.views.partial import PartialView
 
 

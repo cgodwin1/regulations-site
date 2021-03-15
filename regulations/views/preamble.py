@@ -23,7 +23,7 @@ from regulations.generator.html_builder import (
     CFRChangeHTMLBuilder, PreambleHTMLBuilder)
 from regulations.generator.layers.utils import (
     convert_to_python, is_contained_in)
-from regulations.views import chrome, error_handling, utils
+from regulations.views import error_handling, utils
 from regulations.views.diff import Versions
 
 
