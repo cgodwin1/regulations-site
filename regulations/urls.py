@@ -2,8 +2,6 @@ from django.urls import path, register_converter
 from django.conf.urls import url
 
 from regulations.url_caches import daily_cache, lt_cache
-from regulations.views.about import about
-from regulations.views.chrome_breakaway import ChromeSXSView
 from regulations.views.chrome import (
     ChromeView,
     ChromeSearchView)
@@ -58,11 +56,6 @@ urlpatterns = [
     # Example http://.../diff_redirect/201-3/old_version?new_version=new
     url(rf'^diff_redirect/(?P<label_id>{match_section})/(?P<version>{match_version})$',
         diff_redirect, name='diff_redirect'),
-
-    # A section by section paragraph with chrome
-    # Example: http://.../sxs/201-2-g/2011-1738
-    url(rf'^sxs/(?P<label_id>{match_paragraph})/(?P<notice_id>{match_notice})$',
-        lt_cache(ChromeSXSView.as_view()), name='chrome_sxs_view'),
 
     # Search results for non-JS viewers
     # Example: http://.../search?q=term&version=2011-1738
