@@ -44,11 +44,6 @@ def redirect_by_date(request, label_id, year, month, day):
     return redirect_by_date_str(request, label_id, date_str)
 
 
-def redirect_by_current_date(request, label_id):
-    """Find the version which is valid for the current date"""
-    return redirect_by_date_str(request, label_id, date.today().isoformat())
-
-
 def order_diff_versions(label_id, version, new_version):
     # Re-order if needed - History is sorted in reverse chronological order
     for major_version in fetch_grouped_history(label_id.split('-')[0]):

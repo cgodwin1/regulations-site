@@ -13,7 +13,6 @@ from regulations.views.preamble import CFRChangesView, PreambleView
 from regulations.views.goto import GoToRedirectView
 from regulations.views.redirect import (
     diff_redirect,
-    redirect_by_current_date,
     redirect_by_date
 )
 from regulations.views.sidebar import SideBarView
@@ -57,10 +56,6 @@ urlpatterns = [
     url(rf'^(?P<label_id>{match_paragraph})/(?P<year>{match_year})/(?P<month>{match_month})/(?P<day>{match_day})$',
         redirect_by_date, name='redirect_by_date'),
 
-    # Redirect to version by current date
-    # Example: http://.../201-3-v/CURRENT
-    url(rf'^(?P<label_id>{match_paragraph})/CURRENT$',
-        redirect_by_current_date, name='redirect_by_current_date'),
 
     path('<numeric:part>/<version:version>/', PartReaderView.as_view(), name='part_reader_view'),
     path('<numeric:part>/<numeric:section>/<version:version>/', SectionReaderView.as_view(), name='section_reader_view'),
