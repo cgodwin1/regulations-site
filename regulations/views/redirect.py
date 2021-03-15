@@ -49,23 +49,6 @@ def redirect_by_current_date(request, label_id):
     return redirect_by_date_str(request, label_id, date.today().isoformat())
 
 
-def redirect_by_date_get(request, label_id):
-    """Handles date, etc. if they are part of the GET variable. We check for
-    bad data here (as we can't rely on url regex)"""
-    try:
-        year = abs(int(request.GET.get('year', '')))
-        month = abs(int(request.GET.get('month', '')))
-        day = abs(int(request.GET.get('day', '')))
-
-        if year < 100:  # Assume two-digit years are for 2000
-            year = 2000 + year
-
-        return redirect_by_date(request, label_id, "%04d" % year,
-                                "%02d" % month, "%02d" % day)
-    except (ValueError, TypeError):
-        return handle_generic_404(request)
-
-
 def order_diff_versions(label_id, version, new_version):
     # Re-order if needed - History is sorted in reverse chronological order
     for major_version in fetch_grouped_history(label_id.split('-')[0]):

@@ -14,8 +14,7 @@ from regulations.views.goto import GoToRedirectView
 from regulations.views.redirect import (
     diff_redirect,
     redirect_by_current_date,
-    redirect_by_date,
-    redirect_by_date_get
+    redirect_by_date
 )
 from regulations.views.sidebar import SideBarView
 from regulations.views.regulation_landing import RegulationLandingView
@@ -40,11 +39,6 @@ register_converter(converters.VersionConverter, 'version')
 
 urlpatterns = [
     path('', HomepageView.as_view(), name='homepage'),
-
-    # Redirect to version by date (by GET)
-    # Example http://.../regulation_redirect/201-3-v
-    url(rf'^regulation_redirect/(?P<label_id>{match_paragraph})$',
-        redirect_by_date_get, name='redirect_by_date_get'),
 
     # Redirect to a diff based on GET params
     # Example http://.../diff_redirect/201-3/old_version?new_version=new
