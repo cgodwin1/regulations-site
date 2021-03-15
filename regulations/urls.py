@@ -47,13 +47,7 @@ register_converter(converters.SubpartConverter, 'subpart')
 register_converter(converters.VersionConverter, 'version')
 
 urlpatterns = [
-    # Index page
-    # Example http://.../
     path('', HomepageView.as_view(), name='homepage'),
-
-    # About page
-    # Example http://.../about
-    url(rf'^about$', about, name='about'),
 
     # Redirect to version by date (by GET)
     # Example http://.../regulation_redirect/201-3-v
