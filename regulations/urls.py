@@ -3,7 +3,6 @@ from django.conf.urls import url
 
 from regulations.url_caches import daily_cache, lt_cache
 from regulations.views.chrome import ChromeView
-from regulations.views.diff import ChromeSectionDiffView
 from regulations.views.diff import PartialSectionDiffView
 from regulations.views.partial import PartialDefinitionView
 from regulations.views.partial import PartialRegulationView
@@ -55,8 +54,6 @@ urlpatterns = [
 
     # Diff view of a section for non-JS viewers (or book markers)
     # Example: http://.../diff/201-4/2011-1738/2013-10704
-    url(rf'^diff/(?P<label_id>{match_section})/(?P<version>{match_version})/(?P<newer_version>{match_version})$',
-        lt_cache(ChromeSectionDiffView.as_view()), name='chrome_section_diff_view'),
     url(rf'^preamble/(?P<doc_number>{match_paragraph})/cfr_changes/(?P<section>{match_paragraph})$',
         daily_cache(CFRChangesView.as_view()), name='cfr_changes'),
     url(rf'^preamble/(?P<paragraphs>{match_paragraphs})$',

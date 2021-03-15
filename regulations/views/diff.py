@@ -100,41 +100,6 @@ class PartialSectionDiffView(PartialView):
         return context
 
 
-class ChromeSectionDiffView(ChromeView):
-    """Search results with chrome"""
-    template_name = 'regulations/diff-chrome.html'
-    partial_class = PartialSectionDiffView
-    sidebar_components = [DiffHelp]
-
-    def check_tree(self, context):
-        pass    # The tree may or may not exist in the particular version
-
-    def add_diff_content(self, context):
-        context['from_version'] = self.request.GET.get(
-            'from_version', context['version'])
-        context['left_version'] = context['version']
-        context['right_version'] = \
-            context['main_content_context']['newer_version']
-        from_version = self.request.GET.get('from_version', context['version'])
-
-        context['TOC'] = context['main_content_context']['TOC']
-
-        #   Add reference to the first subterp, so we know how to redirect
-        toc = fetch_toc(context['label_id'].split('-')[0], from_version)
-        for entry in toc:
-            if entry.get('is_supplement') and entry.get('sub_toc'):
-                el = entry['sub_toc'][0]
-                el['url'] = SectionUrl().of(
-                    el['index'], from_version,
-                    self.partial_class.sectional_links)
-                context['first_subterp'] = el
-        return context
-
-    def add_main_content(self, context):
-        super(ChromeSectionDiffView, self).add_main_content(context)
-        return self.add_diff_content(context)
-
-
 def reverse_chrome_diff_view(sect_id, left_ver, right_ver, from_version):
     """ Reverse the URL for a chromed diff view. """
 
