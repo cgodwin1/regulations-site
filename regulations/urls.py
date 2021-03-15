@@ -11,10 +11,6 @@ from regulations.views.partial_search import PartialSearch
 from regulations.views.partial_sxs import ParagraphSXSView
 from regulations.views.preamble import CFRChangesView, PreambleView
 from regulations.views.goto import GoToRedirectView
-from regulations.views.redirect import (
-    diff_redirect,
-    redirect_by_date
-)
 from regulations.views.sidebar import SideBarView
 from regulations.views.regulation_landing import RegulationLandingView
 from regulations.views.homepage import HomepageView
@@ -39,23 +35,12 @@ register_converter(converters.VersionConverter, 'version')
 urlpatterns = [
     path('', HomepageView.as_view(), name='homepage'),
 
-    # Redirect to a diff based on GET params
-    # Example http://.../diff_redirect/201-3/old_version?new_version=new
-    url(rf'^diff_redirect/(?P<label_id>{match_section})/(?P<version>{match_version})$',
-        diff_redirect, name='diff_redirect'),
-
     # Diff view of a section for non-JS viewers (or book markers)
     # Example: http://.../diff/201-4/2011-1738/2013-10704
     url(rf'^preamble/(?P<doc_number>{match_paragraph})/cfr_changes/(?P<section>{match_paragraph})$',
         daily_cache(CFRChangesView.as_view()), name='cfr_changes'),
     url(rf'^preamble/(?P<paragraphs>{match_paragraphs})$',
         daily_cache(PreambleView.as_view()), name='chrome_preamble'),
-
-    # Redirect to version by date
-    # Example: http://.../201-3-v/1999/11/8
-    url(rf'^(?P<label_id>{match_paragraph})/(?P<year>{match_year})/(?P<month>{match_month})/(?P<day>{match_day})$',
-        redirect_by_date, name='redirect_by_date'),
-
 
     path('<numeric:part>/<version:version>/', PartReaderView.as_view(), name='part_reader_view'),
     path('<numeric:part>/<numeric:section>/<version:version>/', SectionReaderView.as_view(), name='section_reader_view'),
