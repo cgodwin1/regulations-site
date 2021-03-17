@@ -9,7 +9,6 @@ from regulations.views.reader import SubpartReaderView, SectionReaderView, PartR
 from regulations.views import partial_interp
 from regulations.views.partial_search import PartialSearch
 from regulations.views.partial_sxs import ParagraphSXSView
-from regulations.views.preamble import PreambleView
 from regulations.views.goto import GoToRedirectView
 from regulations.views.sidebar import SideBarView
 from regulations.views.regulation_landing import RegulationLandingView
@@ -34,14 +33,9 @@ register_converter(converters.VersionConverter, 'version')
 
 urlpatterns = [
     path('', HomepageView.as_view(), name='homepage'),
-    
-    url(rf'^preamble/(?P<paragraphs>{match_paragraphs})$',
-        daily_cache(PreambleView.as_view()), name='chrome_preamble'),
-
     path('<numeric:part>/<version:version>/', PartReaderView.as_view(), name='part_reader_view'),
     path('<numeric:part>/<numeric:section>/<version:version>/', SectionReaderView.as_view(), name='section_reader_view'),
     path('<numeric:part>/<subpart:subpart>/<version:version>/', SubpartReaderView.as_view(), name="subpart_reader_view"),
-
     path('goto/', GoToRedirectView.as_view(), name='goto'),
 
     # A regulation landing page
