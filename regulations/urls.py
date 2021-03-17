@@ -2,7 +2,6 @@ from django.urls import path, register_converter
 from django.conf.urls import url
 
 from regulations.url_caches import daily_cache, lt_cache
-from regulations.views.diff import PartialSectionDiffView
 from regulations.views.partial import PartialDefinitionView
 from regulations.views.partial import PartialRegulationView
 from regulations.views.reader import SubpartReaderView, SectionReaderView, PartReaderView
@@ -36,10 +35,6 @@ urlpatterns = [
     path('<numeric:part>/<subpart:subpart>/<version:version>/', SubpartReaderView.as_view(), name="subpart_reader_view"),
     path('goto/', GoToRedirectView.as_view(), name='goto'),
     path('<part>/', RegulationLandingView.as_view(), name="regulation_landing_view"),
-
-    # A diff view of a section (without chrome)
-    url(rf'^partial/diff/(?P<label_id>{match_section})/(?P<version>{match_version})/(?P<newer_version>{match_version})$',
-        lt_cache(PartialSectionDiffView.as_view()), name='partial_section_diff_view'),
 
     # A section by section paragraph (without chrome)
     # Example: http://.../partial/sxs/201-2-g/2011-1738
