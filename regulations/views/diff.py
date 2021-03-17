@@ -4,14 +4,9 @@ from collections import namedtuple
 import six
 from django.urls import reverse
 
-from regulations.generator import generator
-from regulations.generator.html_builder import CFRHTMLBuilder
 from regulations.generator.layers.toc_applier import TableOfContentsLayer
-from regulations.generator.node_types import EMPTYPART, REGTEXT
-from regulations.generator.section_url import SectionUrl
-from regulations.generator.sidebar.diff_help import DiffHelp
-from regulations.generator.toc import fetch_toc
-from regulations.views import error_handling, utils
+from regulations.views import utils
+
 
 class Versions(namedtuple('Versions', ['older', 'newer', 'return_to'])):
     def __new__(cls, older, newer, return_to=None):
