@@ -6,7 +6,6 @@ from regulations.views.partial import PartialDefinitionView
 from regulations.views.partial import PartialRegulationView
 from regulations.views.reader import SubpartReaderView, SectionReaderView, PartReaderView
 from regulations.views import partial_interp
-from regulations.views.partial_sxs import ParagraphSXSView
 from regulations.views.goto import GoToRedirectView
 from regulations.views.regulation_landing import RegulationLandingView
 from regulations.views.homepage import HomepageView
@@ -35,11 +34,6 @@ urlpatterns = [
     path('<numeric:part>/<subpart:subpart>/<version:version>/', SubpartReaderView.as_view(), name="subpart_reader_view"),
     path('goto/', GoToRedirectView.as_view(), name='goto'),
     path('<part>/', RegulationLandingView.as_view(), name="regulation_landing_view"),
-
-    # A section by section paragraph (without chrome)
-    # Example: http://.../partial/sxs/201-2-g/2011-1738
-    url(rf'^partial/sxs/(?P<label_id>{match_paragraph})/(?P<notice_id>{match_notice})$',
-        lt_cache(ParagraphSXSView.as_view()), name='paragraph_sxs_view'),
 
     # A definition templated to be displayed in the sidebar (without chrome)
     # Example: http://.../partial/definition/201-2-g/2011-1738
