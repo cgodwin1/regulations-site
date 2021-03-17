@@ -4,7 +4,6 @@ from django.template import loader
 from regulations.generator import api_reader
 from regulations.generator.sidebar.help import Help as HelpSidebar
 from regulations.generator.layers.utils import convert_to_python
-from regulations.views.sidebar import SideBarView
 
 
 class MissingContentException(Exception):
@@ -64,19 +63,6 @@ def check_version(label_id, version):
     if len(requested_version) > 0:
         requested_version = convert_to_python(requested_version)
         return requested_version[0]
-
-
-def add_to_chrome(body, context, request):
-    chrome_template = loader.get_template('regulations/chrome.html')
-
-    context['main_content'] = body
-    sidebar_view = SideBarView.as_view(components=[HelpSidebar])
-    sidebar_response = sidebar_view(request, label_id=context['label_id'],
-                                    version=context['version'])
-    context['sidebar_content'] = sidebar_response.render().content
-    chrome_body = chrome_template.render(context, request)
-
-    return http.HttpResponseNotFound(chrome_body, content_type='text/html')
 
 
 def handle_missing_section_404(

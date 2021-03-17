@@ -7,10 +7,8 @@ from regulations.views.partial import PartialDefinitionView
 from regulations.views.partial import PartialRegulationView
 from regulations.views.reader import SubpartReaderView, SectionReaderView, PartReaderView
 from regulations.views import partial_interp
-from regulations.views.partial_search import PartialSearch
 from regulations.views.partial_sxs import ParagraphSXSView
 from regulations.views.goto import GoToRedirectView
-from regulations.views.sidebar import SideBarView
 from regulations.views.regulation_landing import RegulationLandingView
 from regulations.views.homepage import HomepageView
 from regulations.views import converters
@@ -38,21 +36,6 @@ urlpatterns = [
     path('<numeric:part>/<subpart:subpart>/<version:version>/', SubpartReaderView.as_view(), name="subpart_reader_view"),
     path('goto/', GoToRedirectView.as_view(), name='goto'),
     path('<part>/', RegulationLandingView.as_view(), name="regulation_landing_view"),
-
-    # Load just the sidebar
-    # Example: http://.../partial/sidebar/201-2/2013-10704
-    #url(rf'^partial/sidebar/(?P<label_id>{match_paragraph})/(?P<version>{match_version})$',
-    #    SideBarView.as_view(), name='sidebar'),
-
-    # Load just search results
-    url(rf'^partial/search(?:/cfr)?/(?P<label_id>{match_reg})$',
-        PartialSearch.as_view(),
-        name='partial_search',
-        kwargs={'doc_type': 'cfr'}),
-    url(rf'^partial/search/preamble/(?P<label_id>{match_preamble})$',
-        PartialSearch.as_view(),
-        name='partial_search',
-        kwargs={'doc_type': 'preamble'}),
 
     # A diff view of a section (without chrome)
     url(rf'^partial/diff/(?P<label_id>{match_section})/(?P<version>{match_version})/(?P<newer_version>{match_version})$',
