@@ -37,15 +37,12 @@ urlpatterns = [
     path('<numeric:part>/<numeric:section>/<version:version>/', SectionReaderView.as_view(), name='section_reader_view'),
     path('<numeric:part>/<subpart:subpart>/<version:version>/', SubpartReaderView.as_view(), name="subpart_reader_view"),
     path('goto/', GoToRedirectView.as_view(), name='goto'),
-
-    # A regulation landing page
-    # Example: http://.../201
     path('<part>/', RegulationLandingView.as_view(), name="regulation_landing_view"),
 
     # Load just the sidebar
     # Example: http://.../partial/sidebar/201-2/2013-10704
-    url(rf'^partial/sidebar/(?P<label_id>{match_paragraph})/(?P<version>{match_version})$',
-        SideBarView.as_view(), name='sidebar'),
+    #url(rf'^partial/sidebar/(?P<label_id>{match_paragraph})/(?P<version>{match_version})$',
+    #    SideBarView.as_view(), name='sidebar'),
 
     # Load just search results
     url(rf'^partial/search(?:/cfr)?/(?P<label_id>{match_reg})$',
