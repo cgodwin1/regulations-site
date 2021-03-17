@@ -9,7 +9,7 @@ from regulations.views.reader import SubpartReaderView, SectionReaderView, PartR
 from regulations.views import partial_interp
 from regulations.views.partial_search import PartialSearch
 from regulations.views.partial_sxs import ParagraphSXSView
-from regulations.views.preamble import CFRChangesView, PreambleView
+from regulations.views.preamble import PreambleView
 from regulations.views.goto import GoToRedirectView
 from regulations.views.sidebar import SideBarView
 from regulations.views.regulation_landing import RegulationLandingView
@@ -34,11 +34,7 @@ register_converter(converters.VersionConverter, 'version')
 
 urlpatterns = [
     path('', HomepageView.as_view(), name='homepage'),
-
-    # Diff view of a section for non-JS viewers (or book markers)
-    # Example: http://.../diff/201-4/2011-1738/2013-10704
-    url(rf'^preamble/(?P<doc_number>{match_paragraph})/cfr_changes/(?P<section>{match_paragraph})$',
-        daily_cache(CFRChangesView.as_view()), name='cfr_changes'),
+    
     url(rf'^preamble/(?P<paragraphs>{match_paragraphs})$',
         daily_cache(PreambleView.as_view()), name='chrome_preamble'),
 
