@@ -4,7 +4,7 @@ from regulations.views.reader import SubpartReaderView, SectionReaderView, PartR
 from regulations.views.goto import GoToRedirectView
 from regulations.views.regulation_landing import RegulationLandingView
 from regulations.views.homepage import HomepageView
-from regulations.views import converters
+from regulations import converters
 
 register_converter(converters.NumericConverter, 'numeric')
 register_converter(converters.SubpartConverter, 'subpart')
