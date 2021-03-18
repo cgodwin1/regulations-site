@@ -2,7 +2,6 @@ from django import http
 from django.template import loader
 
 from regulations.generator import api_reader
-from regulations.generator.layers.utils import convert_to_python
 
 
 class MissingContentException(Exception):
