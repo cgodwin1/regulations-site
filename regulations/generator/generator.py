@@ -5,7 +5,6 @@ from django.conf import settings
 
 from regulations.generator import api_reader
 from regulations.generator.layers.diff_applier import DiffApplier
-from regulations.generator import notices
 
 
 def _data_layers():
@@ -90,17 +89,6 @@ def get_notice(document_number):
 
     api = api_reader.ApiReader()
     return api.notice(document_number)
-
-
-def get_sxs(label_id, notice, fr_page=None):
-    """ Given a paragraph label_id, find the sxs analysis for that paragraph if
-    it exists and has content. fr_page is used to distinguish between
-    multiple analyses in the same notice."""
-
-    all_sxs = notice['section_by_section']
-    relevant_sxs = notices.find_label_in_sxs(all_sxs, label_id, fr_page)
-
-    return relevant_sxs
 
 
 def get_diff_json(regulation, older, newer):
