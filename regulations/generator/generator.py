@@ -54,50 +54,7 @@ def layers(layer_names, doc_type, label_id, sectional=False, version=None):
                            sectional=sectional)
 
 
-def diff_layers(versions, label_id):
-    """Generate the three layer appliers for diffs, which combine two sources
-    of layer data"""
-    def layer_fn(layer_name):
-        api_layer_name = DATA_LAYERS[layer_name].data_source
-        reader = api_reader.ApiReader()
-        older_layer = reader.layer(api_layer_name, 'cfr', label_id,
-                                   versions.older)
-        newer_layer = reader.layer(api_layer_name, 'cfr', label_id,
-                                   versions.newer)
-        older_layer = older_layer or {}
-        newer_layer = newer_layer or {}
-
-        layer_json = dict(newer_layer)  # copy
-        layer_json.update(older_layer)  # older layer takes precedence
-        return layer_json
-    layer_names = [
-        'graphics', 'paragraph', 'keyterms', 'defined', 'formatting',
-        'marker-hiding', 'marker-info'
-    ]
-    return generate_layers(layer_names, layer_fn, version=versions.older)
-
-
 def get_tree_paragraph(paragraph_id, version):
     """Get a single level of the regulation tree."""
     api = api_reader.ApiReader()
     return api.regulation(paragraph_id, version)
-
-
-def get_notice(document_number):
-    """ Get a the data from a particular notice, given the Federal Register
-    document number. """
-
-    api = api_reader.ApiReader()
-    return api.notice(document_number)
-
-
-def get_diff_json(regulation, older, newer):
-    api = api_reader.ApiReader()
-    return api.diff(regulation, older, newer)
-
-
-def get_diff_applier(label_id, older, newer):
-    regulation = label_id.split('-')[0]
-    diff_json = get_diff_json(regulation, older, newer)
-    if diff_json is not None:
-        return DiffApplier(diff_json, label_id)
