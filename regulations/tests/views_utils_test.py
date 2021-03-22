@@ -3,7 +3,6 @@ from unittest import TestCase
 from mock import patch
 
 from django.conf import settings
-from django.test import RequestFactory
 
 from regulations.views import utils
 

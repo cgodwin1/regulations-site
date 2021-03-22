@@ -1,7 +1,5 @@
 from unittest import TestCase
 
-from mock import patch
-
 from regulations.generator.section_url import SectionUrl
 
 

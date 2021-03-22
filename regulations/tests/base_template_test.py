@@ -1,8 +1,7 @@
 from unittest import TestCase
 
-from six.moves.urllib.parse import parse_qs
 from django.template.loader import get_template
-from django.test import RequestFactory, SimpleTestCase, override_settings
+from django.test import RequestFactory
 
 
 class TemplateTest(TestCase):
