@@ -4,7 +4,7 @@ from django.urls import reverse
 
 from regulations.generator import api_reader
 from regulations.views import navigation, utils
-from regulations.views import error_handling
+from regulations.views import errors
 from regulations.views.mixins import SidebarContextMixin, CitationContextMixin, TableOfContentsMixin
 
 
