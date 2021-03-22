@@ -1,9 +1,6 @@
-from itertools import takewhile
-
 from django.urls import reverse, NoReverseMatch
 
 from regulations.generator.node_types import to_markup_id
-from regulations.generator.toc import fetch_toc
 
 
 class SectionUrl(object):

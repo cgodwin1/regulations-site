@@ -29,7 +29,7 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         tree = self.get_regulation(reg_citation, reg_version)
 
         if not meta:
-            raise error_handling.MissingContentException()
+            raise errors.MissingContentException()
 
         c = {
             'tree':         tree,
