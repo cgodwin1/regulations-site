@@ -43,6 +43,37 @@ aside.left-sidebar {
 
 			transition: all .5s ease-out;
 		}
+
+		button {
+			border: none;
+			background: none;
+			color: $reverse_link_color;
+			cursor: pointer;
+			outline: none;
+
+			&:hover {
+				color: $reverse_link_hover;
+				@include transition;
+			}
+
+			&[data-state="expanded"] {
+				display: none;
+			}
+			&[data-state="expanded"] + button {
+				display: initial;
+			}
+
+			&[data-state="collapsed"] {
+				display: initial;
+			}
+			&[data-state="collapsed"] + button {
+				display: none;
+			}
+		}
+
+		button:focus-visible {
+			outline: 2px solid black;
+		}
 	}
 
 	.subpart-letter {

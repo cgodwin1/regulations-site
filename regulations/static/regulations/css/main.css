@@ -13572,6 +13572,32 @@ aside.left-sidebar ul li a {
 aside.left-sidebar ul li[data-state=collapsed] {
   max-height: 0;
 }
+aside.left-sidebar ul button {
+  border: none;
+  background: none;
+  color: #A3E8FF;
+  cursor: pointer;
+  outline: none;
+}
+aside.left-sidebar ul button:hover {
+  color: #fff;
+  transition: all 0.1s ease-in;
+}
+aside.left-sidebar ul button[data-state=expanded] {
+  display: none;
+}
+aside.left-sidebar ul button[data-state=expanded] + button {
+  display: initial;
+}
+aside.left-sidebar ul button[data-state=collapsed] {
+  display: initial;
+}
+aside.left-sidebar ul button[data-state=collapsed] + button {
+  display: none;
+}
+aside.left-sidebar ul button:focus-visible {
+  outline: 2px solid black;
+}
 aside.left-sidebar .subpart-letter {
   cursor: pointer;
 }
