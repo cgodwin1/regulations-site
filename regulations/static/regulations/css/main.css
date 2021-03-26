@@ -13583,16 +13583,16 @@ aside.left-sidebar ul button:hover {
   color: #fff;
   transition: all 0.1s ease-in;
 }
-aside.left-sidebar ul button[data-state=expanded] {
+aside.left-sidebar ul button[data-set-state=expanded][data-state=expanded] {
   display: none;
 }
-aside.left-sidebar ul button[data-state=expanded] + button {
+aside.left-sidebar ul button[data-set-state=expanded][data-state=collapsed] {
   display: initial;
 }
-aside.left-sidebar ul button[data-state=collapsed] {
+aside.left-sidebar ul button[data-set-state=collapsed][data-state=expanded] {
   display: initial;
 }
-aside.left-sidebar ul button[data-state=collapsed] + button {
+aside.left-sidebar ul button[data-set-state=collapsed][data-state=collapsed] {
   display: none;
 }
 aside.left-sidebar ul button:focus-visible {

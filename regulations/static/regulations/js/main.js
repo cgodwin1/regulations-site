@@ -1,6 +1,6 @@
 function makeStateful(el) {
-    const state_change_target = el.getAttribute("data-collapse-target");
-    const state_change_buttons = document.querySelectorAll(`[data-set-state][data-collapse-target='${state_change_target}']`);
+    const state_change_target = el.getAttribute("data-state-name");
+    const state_change_buttons = document.querySelectorAll(`[data-set-state][data-state-name='${state_change_target}']`);
 
     for (const state_change_button of state_change_buttons) {
         state_change_button.addEventListener('click', function() {

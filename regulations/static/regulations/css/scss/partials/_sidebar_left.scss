@@ -56,17 +56,16 @@ aside.left-sidebar {
 				@include transition;
 			}
 
-			&[data-state="expanded"] {
+			&[data-set-state="expanded"][data-state="expanded"] {
 				display: none;
 			}
-			&[data-state="expanded"] + button {
+			&[data-set-state="expanded"][data-state="collapsed"] {
 				display: initial;
 			}
-
-			&[data-state="collapsed"] {
+			&[data-set-state="collapsed"][data-state="expanded"] {
 				display: initial;
 			}
-			&[data-state="collapsed"] + button {
+			&[data-set-state="collapsed"][data-state="collapsed"] {
 				display: none;
 			}
 		}
