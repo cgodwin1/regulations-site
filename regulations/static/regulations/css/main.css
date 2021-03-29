@@ -13586,12 +13586,6 @@ aside.left-sidebar ul button:hover {
 aside.left-sidebar ul button[data-set-state=expanded][data-state=expanded] {
   display: none;
 }
-aside.left-sidebar ul button[data-set-state=expanded][data-state=collapsed] {
-  display: initial;
-}
-aside.left-sidebar ul button[data-set-state=collapsed][data-state=expanded] {
-  display: initial;
-}
 aside.left-sidebar ul button[data-set-state=collapsed][data-state=collapsed] {
   display: none;
 }

@@ -59,12 +59,6 @@ aside.left-sidebar {
 			&[data-set-state="expanded"][data-state="expanded"] {
 				display: none;
 			}
-			&[data-set-state="expanded"][data-state="collapsed"] {
-				display: initial;
-			}
-			&[data-set-state="collapsed"][data-state="expanded"] {
-				display: initial;
-			}
 			&[data-set-state="collapsed"][data-state="collapsed"] {
 				display: none;
 			}
