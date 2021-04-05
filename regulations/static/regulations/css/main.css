@@ -13808,4 +13808,23 @@ html {
   scroll-behavior: smooth;
 }
 
+a {
+  color: #046791;
+}
+a:hover {
+  color: #17415F;
+  cursor: pointer;
+  transition: all 0.1s ease-in;
+}
+
+.container {
+  max-width: 800px;
+  display: block;
+  margin: 0 auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 /*# sourceMappingURL=main.css.map */
