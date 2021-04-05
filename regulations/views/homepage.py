@@ -50,14 +50,16 @@ class HomepageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        all_versions = versions.fetch_regulations_and_future_versions()
-        regs = get_regulations_list(all_versions)
-
-        c = {
-            'regulations': regs,
-            'cfr_title_text': regs[0]['meta']['cfr_title_text'],
-            'cfr_title_number': utils.to_roman(regs[0]['meta']['cfr_title_number']),
-            'cfr_titleno_arabic': regs[0]['meta']['cfr_title_number'],
-        }
+        try:
+            all_versions = versions.fetch_regulations_and_future_versions()
+            regs = get_regulations_list(all_versions)
+            c = {
+                'regulations': regs,
+                'cfr_title_text': regs[0]['meta']['cfr_title_text'],
+                'cfr_title_number': utils.to_roman(regs[0]['meta']['cfr_title_number']),
+                'cfr_titleno_arabic': regs[0]['meta']['cfr_title_number'],
+            }
+        except:
+            c = {}
 
         return {**context, **c}

@@ -17,37 +17,48 @@
   <main class="reg-title">
     <div class="container">
       <h1>
-        Title {{cfr_title_number|upper}} {{cfr_title_text}}
+        Title
+        {% if cfr_title_number and cfr_title_text %}
+          {{cfr_title_number|upper}} {{cfr_title_text}}
+        {% else %}
+          N/A
+        {% endif %}
       </h1>
       
       <ul class="part-names">
-        {% for regulation in regulations %}
-        <li>
-          <a href="{% url 'regulation_landing_view' regulation.part %}">
-            <div class="part-number">
-              {{regulation.part}}:
-            </div>
-            <div class="part-title">
-              {% if regulation.meta.reg_letter %}
-                Regulation {{regulation.meta.reg_letter}}
-                {{regulation.meta.statutory_name|title}}
-              {% else %}
-                {{regulation.meta.statutory_name|title}}
-              {% endif %}
-            </div>
-          </a>
+        {% if regulations %}
+          {% for regulation in regulations %}
+          <li>
+            <a href="{% url 'regulation_landing_view' regulation.part %}">
+              <div class="part-number">
+                {{regulation.part}}:
+              </div>
+              <div class="part-title">
+                {% if regulation.meta.reg_letter %}
+                  Regulation {{regulation.meta.reg_letter}}
+                  {{regulation.meta.statutory_name|title}}
+                {% else %}
+                  {{regulation.meta.statutory_name|title}}
+                {% endif %}
+              </div>
+            </a>
 
-          {% for amendment in regulation.amendments %}
-            <div>
-              New amendment effective {{amendment.by_date|date:'n/j/Y'}}
-              <a href="{% url 'reader_view' regulation.part regulation.reg_first_section amendment.version %}">View new amendment</a>
-            </div>
+            {% for amendment in regulation.amendments %}
+              <div>
+                New amendment effective {{amendment.by_date|date:'n/j/Y'}}
+                <a href="{% url 'reader_view' regulation.part regulation.reg_first_section amendment.version %}">View new amendment</a>
+              </div>
+            {% endfor %}
+          </li>
           {% endfor %}
-        </li>
-        {% endfor %}
+        {% else %}
+          <p>No regulations are currently loaded.</p>
+        {% endif %}
       </ul>
 
-      {% include "regulations/recent-changes.html" %}
+      {% if regulations %}
+        {% include "regulations/recent-changes.html" %}
+      {% endif %}
 
       <div class="disclaimer">
         <h5>Legal Limitations of This Tool</h5>
