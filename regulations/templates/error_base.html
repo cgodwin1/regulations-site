@@ -1,16 +1,9 @@
 {% extends "regulations/base.html" %}
 {% load static %}
-{% block app_js %}
-<link rel="stylesheet" href="{% static '/css/main.css' %}"/>
-{% endblock %}
 
 {% block title %}eRegulations{% endblock %}
 
 {% block body %}
-
-<header>
-    {% include "regulations/main-header.html" %}
-</header>
 
 <main class="error-page">
     <div class="error-left">
@@ -20,9 +13,5 @@
     </div>
     <img class="error-image" src="{% static 'images/browser.svg' %}" />
 </main>
-
-<footer>
-    {% include "regulations/full_footer.html" %}
-</footer>
 
 {% endblock %}
