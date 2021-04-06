@@ -8,6 +8,16 @@ header {
   border-bottom: 1px solid $primary_color;
 }
 
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .box {
   display: flex;
 }
@@ -15,8 +25,8 @@ header {
 main {
   display: table-cell;
   width: calc(100% - 800px);
-  flex: 1;
   padding: 2em;
+  flex: 1 0 auto;
 }
 
 aside {
@@ -34,11 +44,4 @@ aside {
     border-left: 1px solid $border_color;
   }
 
-}
-
-footer {
-  padding: 1em 2em;
-  border-top: 1px solid $border_color;
-  background: $teritary_background_color;
-  min-height: 4em;
 }

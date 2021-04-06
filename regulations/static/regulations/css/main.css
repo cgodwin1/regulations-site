@@ -13330,6 +13330,16 @@ header {
   border-bottom: 1px solid #17415F;
 }
 
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .box {
   display: flex;
 }
@@ -13337,8 +13347,8 @@ header {
 main {
   display: table-cell;
   width: calc(100% - 800px);
-  flex: 1;
   padding: 2em;
+  flex: 1 0 auto;
 }
 
 aside {
@@ -13353,13 +13363,6 @@ aside.right-sidebar {
   display: table-cell;
   width: 400px;
   border-left: 1px solid #D6D7D9;
-}
-
-footer {
-  padding: 1em 2em;
-  border-top: 1px solid #D6D7D9;
-  background: #EEFAFE;
-  min-height: 4em;
 }
 
 a {
@@ -13806,6 +13809,14 @@ a:hover {
 
 html {
   scroll-behavior: smooth;
+}
+
+footer {
+  padding: 1em 2em;
+  border-top: 1px solid #D6D7D9;
+  background: #EEFAFE;
+  min-height: 4em;
+  flex-shrink: 0;
 }
 
 a {
