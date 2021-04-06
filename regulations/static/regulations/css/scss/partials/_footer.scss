@@ -9,6 +9,20 @@ footer {
   padding: 1em 2em;
   border-top: 1px solid $border_color;
   background: $teritary_background_color;
-  min-height: 4em;
   flex-shrink: 0;
+  height: 217px;
+
+  display: flex;
+
+  div.footer-left {
+      
+  }
+
+  div.footer-middle {
+
+  }
+
+  div.footer-right {
+
+  }
 }

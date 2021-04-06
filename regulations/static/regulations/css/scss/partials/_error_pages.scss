@@ -7,8 +7,6 @@
 
 .error-page {
     display: flex;
-    padding-top: 10vh;
-    padding-bottom: 10vh;
     width: 75%;
     max-width: 920px;
     margin: auto;
@@ -16,6 +14,7 @@
 
 .error-left {
     flex: auto;
+    margin: auto;
     padding-right: 1em;
 
     p.error-code {

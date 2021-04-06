@@ -13306,6 +13306,23 @@ readers do not read off random characters that represent icons */
   font-weight: 900;
 }
 
+/*!
+ * Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+@font-face {
+  font-family: "Font Awesome 5 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../fonts/webfonts/fa-brands-400.eot");
+  src: url("../fonts/webfonts/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("../fonts/webfonts/fa-brands-400.woff2") format("woff2"), url("../fonts/webfonts/fa-brands-400.woff") format("woff"), url("../fonts/webfonts/fa-brands-400.ttf") format("truetype"), url("../fonts/webfonts/fa-brands-400.svg#fontawesome") format("svg");
+}
+.fab {
+  font-family: "Font Awesome 5 Brands";
+  font-weight: 400;
+}
+
 a {
   color: #046791;
 }
@@ -13815,10 +13832,10 @@ footer {
   padding: 1em 2em;
   border-top: 1px solid #D6D7D9;
   background: #EEFAFE;
-  min-height: 4em;
   flex-shrink: 0;
+  height: 217px;
+  display: flex;
 }
-
 a {
   color: #046791;
 }
@@ -13840,8 +13857,6 @@ html {
 
 .error-page {
   display: flex;
-  padding-top: 10vh;
-  padding-bottom: 10vh;
   width: 75%;
   max-width: 920px;
   margin: auto;
@@ -13849,6 +13864,7 @@ html {
 
 .error-left {
   flex: auto;
+  margin: auto;
   padding-right: 1em;
 }
 .error-left p.error-code {
