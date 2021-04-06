@@ -4,7 +4,6 @@ from django.urls import reverse
 
 from regulations.generator import api_reader
 from regulations.views import navigation, utils
-from regulations.views import errors
 from regulations.views.mixins import SidebarContextMixin, CitationContextMixin, TableOfContentsMixin
 
 
@@ -29,7 +28,7 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         tree = self.get_regulation(reg_citation, reg_version)
 
         if not meta:
-            raise errors.MissingContentException()
+            raise Http404
 
         c = {
             'tree':         tree,
