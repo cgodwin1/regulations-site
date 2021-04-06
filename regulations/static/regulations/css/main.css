@@ -13829,12 +13829,11 @@ html {
 
 .error-page {
   display: flex;
-  justify-content: center;
   padding-top: 10vh;
   padding-bottom: 10vh;
   width: 75%;
-  margin: auto;
   max-width: 920px;
+  margin: auto;
 }
 
 .error-left {
@@ -13843,14 +13842,12 @@ html {
 }
 .error-left p.error-code {
   font-family: "Open Sans", sans-serif;
-  font-style: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 19px;
 }
 .error-left p.error-header {
   font-family: "Merriweather", Georgia, serif;
-  font-style: normal;
   font-weight: bold;
   font-size: 36px;
   line-height: 46px;
@@ -13858,7 +13855,6 @@ html {
 }
 .error-left p {
   font-family: "Open Sans", sans-serif;
-  font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 24px;
