@@ -13367,11 +13367,14 @@ body {
   width: 100%;
 }
 
+.body-content {
+  flex: 1 0 auto;
+}
+
 main {
   display: table-cell;
   width: calc(100% - 800px);
   padding: 2em;
-  flex: 1 0 auto;
 }
 
 aside {

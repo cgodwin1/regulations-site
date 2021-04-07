@@ -43,7 +43,9 @@ CSS/Javascript etc., should inherit from this template.
     </header>
     {% endblock %}
 
-    {% block body %}{% endblock %}
+    <div class="body-content">
+        {% block body %}{% endblock %}
+    </div>
 
     {% block footer %}
     <footer>
