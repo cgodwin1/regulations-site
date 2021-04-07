@@ -1,5 +1,4 @@
 from django.urls import path, register_converter
-from django.views.defaults import page_not_found
 
 from regulations.views.reader import SubpartReaderView, SectionReaderView, PartReaderView
 from regulations.views.goto import GoToRedirectView
