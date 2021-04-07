@@ -5,13 +5,13 @@ full_footer contains the larger footer used on the universal landing and about p
 {% load static %}
 
 <div class="footer-left">
-    <img src="{% static 'images/medicaid.png' %}" />
-    <p>Centers for Medicare &amp; Medicaid Services</p>
+    <a href="#"><img src="{% static 'images/medicaid.png' %}" /></a>
+    <p class="footer-bold">Centers for Medicare &amp; Medicaid Services</p>
     <p>7500 Security Boulevard, Baltimore MD 21244</p>
 </div>
 
 <div class="footer-middle">
-    <h1>Legal Limitations of This Tool</h1>
+    <p class="footer-bold">Legal Limitations of This Tool</p>
     <p>The CMS Regulations tool is an editorial compilation of material and not
         an official legal edition of the Code of Federal Regulations or the
         Federal Register. We have made every effort to ensure the material
@@ -23,9 +23,10 @@ full_footer contains the larger footer used on the universal landing and about p
 </div>
 
 <div class="footer-right">
-    <i class="fab fa-twitter"></i>
-    <i class="fab fa-youtube"></i>
+    <p>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+    </p>
     <p>A federal government managed website by the Centers for Medicare &amp; Medicaid Services.</p>
     <p>This website was last updated on 1/14/2021.</p>
-
 </div>
