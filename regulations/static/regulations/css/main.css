@@ -14092,17 +14092,17 @@ footer {
   display: flex;
   justify-content: space-between;
 }
-footer p.footer-bold {
-  font-family: "Merriweather", Georgia, serif;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 18px;
-  color: #5B616B;
-}
 footer p {
   font-family: "Open Sans", sans-serif;
   font-weight: normal;
   font-size: 12px;
+  line-height: 18px;
+  color: #5B616B;
+}
+footer p.footer-bold {
+  font-family: "Merriweather", Georgia, serif;
+  font-weight: bold;
+  font-size: 14px;
   line-height: 18px;
   color: #5B616B;
 }
@@ -14155,7 +14155,7 @@ html {
   margin-left: 0.3rem;
 }
 
-.error-page {
+main.error-page {
   display: flex;
   width: 75%;
   height: 100%;
@@ -14163,33 +14163,31 @@ html {
   max-width: 920px;
   margin: auto;
 }
-
-.error-left {
+main.error-page div.error-left {
   flex: auto;
   margin: auto;
   padding-right: 1em;
 }
-.error-left p.error-code {
+main.error-page div.error-left p {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+main.error-page div.error-left p.error-code {
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 14px;
   line-height: 19px;
 }
-.error-left p.error-header {
+main.error-page div.error-left p.error-header {
   font-family: "Merriweather", Georgia, serif;
   font-weight: bold;
   font-size: 36px;
   line-height: 46px;
   margin-top: 0;
 }
-.error-left p {
-  font-family: "Open Sans", sans-serif;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-img.error-image {
+main.error-page img.error-image {
   flex: auto;
   width: 185px;
   max-width: 185px;
