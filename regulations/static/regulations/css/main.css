@@ -14089,8 +14089,8 @@ footer {
   border-top: 1px solid #D6D7D9;
   background: #EEFAFE;
   flex-shrink: 0;
-  justify-content: center;
   display: flex;
+  justify-content: space-between;
 }
 footer p.footer-bold {
   font-family: "Merriweather", Georgia, serif;
@@ -14107,21 +14107,28 @@ footer p {
   color: #5B616B;
 }
 footer div.footer-left {
-  padding-right: 4em;
+  max-width: calc(400px - 2em);
 }
 footer div.footer-left img {
   width: 100%;
   max-width: 219px;
 }
 footer div.footer-middle {
-  width: 45%;
-  padding-right: 4em;
+  max-width: calc(100% - 800px - 4em);
+}
+footer div.footer-right {
+  max-width: calc(400px - 2em);
 }
 footer div.footer-right i {
   font-size: 30px;
   line-height: 34px;
   color: #046791;
   padding-right: 0.5em;
+}
+footer div.footer-right i:hover {
+  color: #17415F;
+  cursor: pointer;
+  transition: all 0.1s ease-in;
 }
 
 a {
