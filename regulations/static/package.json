@@ -1,18 +1,18 @@
 {
-  "name": "regulations",
-  "description": "",
-  "scripts": {
-    "css": "npx sass -I node_modules regulations/css/scss/main.scss regulations/css/main.css",
-    "watch-css": "npx sass --watch -I node_modules regulations/css/scss/main.scss regulations/css/main.css"
-  },
-  "license": "CC",
-  "private": true,
-  "engines": {
-    "node": "15"
-  },
-  "dependencies": {
-    "@cmsgov/design-system": "^2.4.0",
-    "@fortawesome/fontawesome-free": "^5.15.3",
-    "sass": "^1.32.8"
-  }
+    "name": "regulations",
+    "description": "",
+    "scripts": {
+        "css": "npx sass -I node_modules regulations/css/scss/main.scss regulations/css/main.css",
+        "watch-css": "npx sass --watch -I node_modules regulations/css/scss/main.scss regulations/css/main.css"
+    },
+    "license": "CC",
+    "private": true,
+    "engines": {
+        "node": "15"
+    },
+    "dependencies": {
+        "@cmsgov/design-system": "^2.4.0",
+        "@fortawesome/fontawesome-free": "^5.15.3",
+        "sass": "^1.32.8"
+    }
 }
