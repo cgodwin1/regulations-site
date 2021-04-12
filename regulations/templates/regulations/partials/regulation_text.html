@@ -11,5 +11,5 @@
     {{c.text | internalcitation:c | safe}}
 </section>
 {% for node in c.children %}
-{% include "regulations/regulation_text.html" with c=node %}
+{% include "regulations/partials/regulation_text.html" with c=node %}
 {% endfor %}

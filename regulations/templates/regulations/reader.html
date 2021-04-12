@@ -28,16 +28,16 @@
             </button>
         </div>
         {% include "regulations/partials/_jump-to.html" %}
-        {% include "regulations/toc.html" %}
+        {% include "regulations/partials/toc.html" %}
     </aside>
 
     <main class="reg-text">
-        {% include "regulations/regulation_text.html" with c=tree %}
-        {% include "regulations/navigation.html" %}
+        {% include "regulations/partials/regulation_text.html" with c=tree %}
+        {% include "regulations/partials/navigation.html" %}
     </main>
 
     <aside class="right-sidebar">
-        {%include "regulations/sidebar.html"%}
+        {% include "regulations/partials/sidebar.html" %}
     </aside>
 
 </div>   
