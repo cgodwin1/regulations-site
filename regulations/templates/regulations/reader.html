@@ -14,34 +14,30 @@
 {% endblock %}
 
 {% block body %}
+    <div class="box">
+        <aside class="left-sidebar" data-state="expanded" data-state-name="left-sidebar">
+            <div class="toc-controls">
+                <button data-set-state="collapsed" data-state-name="left-sidebar">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    COLLAPSE
+                </button>
+                <button data-set-state="expanded" data-state-name="left-sidebar">
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
+            {% include "regulations/partials/_jump-to.html" %}
+            {% include "regulations/partials/toc.html" %}
+        </aside>
 
-<div class="box">
+        <main class="reg-text">
+            {% include "regulations/partials/regulation_text.html" with c=tree %}
+            {% include "regulations/partials/navigation.html" %}
+        </main>
 
-    <aside class="left-sidebar" data-state="expanded" data-state-name="left-sidebar">
-        <div class="toc-controls">
-            <button data-set-state="collapsed" data-state-name="left-sidebar">
-                <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                COLLAPSE
-            </button>
-            <button data-set-state="expanded" data-state-name="left-sidebar">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-            </button>
-        </div>
-        {% include "regulations/partials/_jump-to.html" %}
-        {% include "regulations/partials/toc.html" %}
-    </aside>
-
-    <main class="reg-text">
-        {% include "regulations/partials/regulation_text.html" with c=tree %}
-        {% include "regulations/partials/navigation.html" %}
-    </main>
-
-    <aside class="right-sidebar">
-        {% include "regulations/partials/sidebar.html" %}
-    </aside>
-
-</div>   
-
+        <aside class="right-sidebar">
+            {% include "regulations/partials/sidebar.html" %}
+        </aside>
+    </div>
 {% endblock %}
 
 {% block post_footer %}

@@ -19,28 +19,28 @@
             
             <ul class="part-names">
                 {% for regulation in regulations %}
-                <li>
-                    <a href="{% url 'regulation_landing_view' regulation.part %}">
-                        <div class="part-number">
-                            {{regulation.part}}:
-                        </div>
-                        <div class="part-title">
-                            {% if regulation.meta.reg_letter %}
-                                Regulation {{regulation.meta.reg_letter}}
-                                {{regulation.meta.statutory_name|title}}
-                            {% else %}
-                                {{regulation.meta.statutory_name|title}}
-                            {% endif %}
-                        </div>
-                    </a>
+                    <li>
+                        <a href="{% url 'regulation_landing_view' regulation.part %}">
+                            <div class="part-number">
+                                {{regulation.part}}:
+                            </div>
+                            <div class="part-title">
+                                {% if regulation.meta.reg_letter %}
+                                    Regulation {{regulation.meta.reg_letter}}
+                                    {{regulation.meta.statutory_name|title}}
+                                {% else %}
+                                    {{regulation.meta.statutory_name|title}}
+                                {% endif %}
+                            </div>
+                        </a>
 
-                    {% for amendment in regulation.amendments %}
-                        <div>
-                            New amendment effective {{amendment.by_date|date:'n/j/Y'}}
-                            <a href="{% url 'reader_view' regulation.part regulation.reg_first_section amendment.version %}">View new amendment</a>
-                        </div>
-                    {% endfor %}
-                </li>
+                        {% for amendment in regulation.amendments %}
+                            <div>
+                                New amendment effective {{amendment.by_date|date:'n/j/Y'}}
+                                <a href="{% url 'reader_view' regulation.part regulation.reg_first_section amendment.version %}">View new amendment</a>
+                            </div>
+                        {% endfor %}
+                    </li>
                 {% endfor %}
 
                 {% if not regulations %}
@@ -60,7 +60,5 @@
                     procedural, that are enforceable by any party in any manner.</p>
             </div>
         </div>
-
     </main>
-
 {% endblock %}
