@@ -12,6 +12,14 @@ aside.left-sidebar {
 	position: sticky;
 	top: 0;
 
+	.toc-titles {
+		display: table-cell;
+	}
+
+	.toc-toggles {
+		display: table-cell;
+	}
+
 	a {
 		color: $reverse_link_color;
 
