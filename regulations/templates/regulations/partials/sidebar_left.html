@@ -27,7 +27,11 @@
             {% if item.is_section %}
                 {% include "regulations/partials/toc_section.html" %}
             {% else %}
-                {% include "regulations/partials/toc_subpart.html" %}
+                {% if item.expanded %} 
+                    {% include "regulations/partials/toc_subpart.html" with collapse_state="expanded" %}
+                {% else %}
+                    {% include "regulations/partials/toc_subpart.html" with collapse_state="collapsed" %}
+                {% endif %}
             {% endif %}
         {% endfor %}
     </ul>

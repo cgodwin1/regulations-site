@@ -47,8 +47,10 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         }
 
         links = self.get_view_links(context, toc)
+        self.set_expanded_state(context, toc)
 
         return {**context, **c, **links}
+
 
     def get_regulation(self, label_id, version):
         regulation = self.client.regulation(label_id, version)
@@ -64,6 +66,9 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         if versions is None:
             raise Http404
         return versions['versions']
+
+    def set_expanded_state(self, context, toc):
+        pass
 
 
 class PartReaderView(ReaderView):
@@ -85,6 +90,7 @@ class SubpartReaderView(ReaderView):
         part = context['part']
         version = context['version']
         subpart = context['subpart']
+
         section = utils.find_subpart_first_section(subpart, toc)
         if section is None:
             section = utils.first_section(part, version)
@@ -93,6 +99,12 @@ class SubpartReaderView(ReaderView):
         return {
             'part_view_link': reverse('reader_view', args=(part, version)) + '#' + citation,
         }
+
+    def set_expanded_state(self, context, toc):
+        for el in toc:
+            if 'index' in el:
+                if 'Subpart' in el['index']:
+                    el['expanded'] = '-'.join(el['index'][1:]) == context['subpart']
 
 
 class SectionReaderView(TableOfContentsMixin, View):

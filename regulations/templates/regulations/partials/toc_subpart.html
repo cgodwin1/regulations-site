@@ -7,12 +7,12 @@
         </h3>
     </div>
     <div class="toc-toggles">
-        <button tabindex="0" data-state="expanded" data-set-state="expanded" data-state-name="{{item.section_id}}"><i class="fa fa-chevron-down"></i></button>
-        <button tabindex="0" data-state="expanded" data-set-state="collapsed" data-state-name="{{item.section_id}}"><i class="fa fa-chevron-up"></i></button>
+        <button tabindex="0" data-state="{{ collapse_state }}" data-set-state="expanded" data-state-name="{{item.section_id}}"><i class="fa fa-chevron-down"></i></button>
+        <button tabindex="0" data-state="{{ collapse_state }}" data-set-state="collapsed" data-state-name="{{item.section_id}}"><i class="fa fa-chevron-up"></i></button>
     </div>
 </li>
 
-<li data-state="expanded" data-state-name="{{item.section_id}}">
+<li data-state="{{ collapse_state }}" data-state-name="{{item.section_id}}">
     {% if item.sub_toc %}
         {% include "regulations/partials/toc_sub_toc.html" with type="subpart" %}
     {% endif %}
