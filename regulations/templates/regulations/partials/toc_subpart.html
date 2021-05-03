@@ -1,18 +1,20 @@
-<li data-subpart-heading data-subgroup="subpart-{{item.index|last}}" id="{{item}}" class="subpart-heading-{{item.index|last}} section-subpart" tabindex="0">
+<li data-state="{{ collapse_state }}" data-state-name="{{ item.section_id }}" data-subpart-heading data-subgroup="subpart-{{item.index|last}}" id="{{item}}" class="subpart-heading-{{item.index|last}} section-subpart {% if item.expanded %}active{% endif %}" tabindex="0">
     <div class="toc-titles">
-        <h3 class="toc-nav__divider " data-section-id="{{item.section_id}}" id="nav-{{item.section_id}}">
+        <h3 data-section-id="{{item.section_id}}" id="nav-{{item.section_id}}">
             <a class="subpart-letter">{{item.label|safe}} <span class="subpart-range">({{ item.sub_toc.0.label }} - {% with item.sub_toc|last as last %}{{ last.label }}{% endwith %})</span></a>
         
             <div class="subpart-name">{{item.sub_label|safe}}</div>
         </h3>
     </div>
     <div class="toc-toggles">
-        <button tabindex="0" data-state="{{ collapse_state }}" data-set-state="expanded" data-state-name="{{item.section_id}}"><i class="fa fa-chevron-down"></i></button>
-        <button tabindex="0" data-state="{{ collapse_state }}" data-set-state="collapsed" data-state-name="{{item.section_id}}"><i class="fa fa-chevron-up"></i></button>
+        {% if item.sub_toc %}
+            <span tabindex="0" data-state="{{ collapse_state }}" data-set-state="expanded" data-state-name="{{ item.section_id }}"><i class="fa fa-chevron-down"></i></span>
+            <span tabindex="0" data-state="{{ collapse_state }}" data-set-state="collapsed" data-state-name="{{ item.section_id }}"><i class="fa fa-chevron-up"></i></span>
+        {% endif %}
     </div>
 </li>
 
-<li data-state="{{ collapse_state }}" data-state-name="{{item.section_id}}">
+<li class="subtoc {% if item.expanded %}active{% endif %}" data-state="{{ collapse_state }}" data-state-name="{{ item.section_id }}">
     {% if item.sub_toc %}
         {% include "regulations/partials/toc_sub_toc.html" with type="subpart" %}
     {% endif %}

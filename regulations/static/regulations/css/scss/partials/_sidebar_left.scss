@@ -11,13 +11,48 @@ aside.left-sidebar {
 	overflow-y: scroll;
 	position: sticky;
 	top: 0;
+	padding-left: 0;
+	padding-right: 0;
 
 	.toc-titles {
-		display: table-cell;
+		width: calc(100% - 48px);
+		display: block;
+		float: left;
+		padding-right: $spacer-1;
 	}
 
 	.toc-toggles {
-		display: table-cell;
+		width: 40px;
+		display: block;
+		float: left;
+
+		&:hover {
+			span {
+				color: $reverse_link_hover;
+				@include transition;
+			}
+		}
+
+		span {
+			border: none;
+			background: none;
+			color: $reverse_link_color;
+			cursor: pointer;
+			outline: none;
+			margin-top: $spacer-3;
+			display: block;
+
+			&[data-set-state="expanded"][data-state="expanded"] {
+				display: none;
+			}
+			&[data-set-state="collapsed"][data-state="collapsed"] {
+				display: none;
+			}
+		}
+
+		span:focus-visible {
+			outline: 2px solid black;
+		}
 	}
 
 	a {
@@ -33,47 +68,49 @@ aside.left-sidebar {
 
 		&.toggle-toc-menu-sections {
 			padding-left: $spacer-2;
+			padding-right: $spacer-2;
 		}
 
 		li {
 			list-style: none;
 			overflow: hidden;
-			max-height: 500em;
+
+			&.active {
+				background: $reverse_background_darker;
+
+				.subpart-letter {
+					color: $reverse_text_color;
+				}
+			}
+
+			h3 {
+				margin-left: $spacer-4;
+			}
 
 			a {
 				text-decoration: none;
 				font-weight: bold;
 			}
 
-			&[data-state="collapsed"] {
-				max-height: 0;
+			&.orphan {
+				padding: $spacer-2 $spacer-4;
 			}
 
-			transition: all 1s ease-out;
-		}
+			&.subtoc {
+				padding: 0 $spacer-4 0 $spacer-4;
+				transition-property: max-height;
+				transition-duration: 1s;
+				transition-timing-function: ease-in;
+				max-height: 200vh;
 
-		button {
-			border: none;
-			background: none;
-			color: $reverse_link_color;
-			cursor: pointer;
-			outline: none;
-
-			&:hover {
-				color: $reverse_link_hover;
-				@include transition;
+				&.active {
+					background: $reverse_background_darker;	
+				}					
+			
+				&[data-state="collapsed"] {
+					max-height: 0;
+				}
 			}
-
-			&[data-set-state="expanded"][data-state="expanded"] {
-				display: none;
-			}
-			&[data-set-state="collapsed"][data-state="collapsed"] {
-				display: none;
-			}
-		}
-
-		button:focus-visible {
-			outline: 2px solid black;
 		}
 	}
 
@@ -105,7 +142,6 @@ aside.left-sidebar {
 	.toc-controls {
 		border-bottom: 1px solid $secondary_border_color;
 		padding-bottom: $spacer-2;
-		margin: 0 -2em;
 
 		button {
 			outline: none;
@@ -163,6 +199,7 @@ aside.left-sidebar {
 .jump-to {
 	border-bottom: 1px solid $secondary_border_color;
 	padding: $spacer-2 0 $spacer-4;
+	margin: 0 $spacer-4;
 
 	.jump-to-label {
 		margin: $spacer-2 0 $spacer-1 0;
