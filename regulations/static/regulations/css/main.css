@@ -14066,6 +14066,8 @@ aside.left-sidebar .toc-controls button {
   background: none;
   margin-left: 24px;
   cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 aside.left-sidebar .toc-controls button:hover {
   color: #fff;

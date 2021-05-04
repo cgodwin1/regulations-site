@@ -150,6 +150,8 @@ aside.left-sidebar {
 			background: none;
 			margin-left: $spacer-3;
 			cursor: pointer;
+			text-transform: uppercase;
+			font-weight: 600;
 
 			&:hover {
 				color: $reverse_link_hover;
