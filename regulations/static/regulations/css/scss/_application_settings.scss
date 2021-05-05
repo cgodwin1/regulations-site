@@ -11,6 +11,7 @@
 $teal: #026666;
 $darkest_blue: #102E43;
 $dark_blue: #17415F;
+$mid_dark_blue: #205982;
 $mid_blue: #046791;
 $light_blue: #A3E8FF;
 $lightest_blue: #EEFAFE;
@@ -53,9 +54,11 @@ $secondary_background_color: $lightest_gray;
 $teritary_background_color: $lightest_blue;
 $reverse_background_color: $dark_blue;
 $reverse_background_darker: $darkest_blue;
+$reverse_background_lighter: $mid_dark_blue;
 
 $border_color: $light_gray;
 $secondary_border_color: $mid_blue;
+$hover_border_color: $light_blue;
 
 $primary_text_color: $dark_gray;
 $secondary_text_color: $mid_gray;

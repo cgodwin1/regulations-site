@@ -5,6 +5,12 @@
 
 @import "../application_settings";
 
+// Partial-Specific Variables
+
+$toc_toggles_width: 64px;
+
+// Sidebar
+
 aside.left-sidebar {
 	color: $reverse_text_color;
 	height: 100vh;
@@ -13,155 +19,7 @@ aside.left-sidebar {
 	top: 0;
 	padding-left: 0;
 	padding-right: 0;
-
-	.toc-titles {
-		width: calc(100% - 64px);
-		display: block;
-		float: left;
-	}
-
-	.toc-toggles {
-		width: 64px;
-		display: block;
-		float: left;
-
-		&:hover {
-			span {
-				color: $reverse_link_hover;
-				@include transition;
-			}
-		}
-
-		span {
-			color: $reverse_link_color;
-			cursor: pointer;
-			margin-top: $spacer-1;
-			display: block;
-			padding: $spacer-2;  // Helps users by making the toggle target bigger, ~42px square
-
-			&[data-set-state="expanded"][data-state="expanded"] {
-				display: none;
-			}
-			&[data-set-state="collapsed"][data-state="collapsed"] {
-				display: none;
-			}
-		}
-
-		span:focus-visible {
-			outline: 2px solid black;
-		}
-	}
-
-	a {
-		color: $reverse_link_color;
-
-		&:hover {
-			color: $reverse_link_hover;
-		}
-	}
-
-	ul {
-		padding: 0  0 $spacer-2 0;
-
-		&.toggle-toc-menu-sections {
-			padding-left: $spacer-2;
-			padding-right: $spacer-2;
-		}
-
-		li {
-			list-style: none;
-			overflow: hidden;
-
-			&.active {
-				background: $reverse_background_darker;
-
-				.subpart-info {
-					color: $reverse_text_color;
-				}
-			}
-
-			h3 {
-				margin-left: $spacer-4;
-			}
-
-			a {
-				text-decoration: none;
-				font-weight: bold;
-			}
-
-			&.orphan {
-				padding: $spacer-2 $spacer-4;
-			}
-
-			&.subtoc {
-				padding: 0 $spacer-4 0 $spacer-4;
-				transition-property: max-height;
-				transition-duration: 1s;
-				transition-timing-function: ease-in;
-				max-height: 200vh;
-
-				&.active {
-					background: $reverse_background_darker;	
-				}					
-			
-				&[data-state="collapsed"] {
-					max-height: 0;
-				}
-			}
-		}
-	}
-
-	.subpart-range {
-		font-size: $font-size-sm;
-	}
-
-	.subpart-name {
-		font-size: $font-size-sm;
-		font-weight: normal;
-		padding-right: $spacer-4;
-	}
-
-	.toc-section-number {
-		font-size: $font-size-sm;
-	}
-
-	.toc-section-name {
-		color: $reverse_text_color;
-		font-weight: normal;
-		font-size: $font-size-sm;
-		margin-bottom: $spacer-2;
-	}
-
-	.toc-controls {
-		border-bottom: 1px solid $secondary_border_color;
-		padding-bottom: $spacer-2;
-
-		button {
-			outline: none;
-			color: $reverse_link_color;
-			border: none;
-			background: none;
-			margin-left: $spacer-3;
-			cursor: pointer;
-			text-transform: uppercase;
-			font-weight: 600;
-
-			&:hover {
-				color: $reverse_link_hover;
-				@include transition;
-			}
-
-			img {
-				height: $base-font-size;
-				padding-right: 5px;
-			}
-
-			&[data-set-state="expanded"] {
-				margin: 0 auto;
-				display: none;
-			}
-		}
-	}
+	transition: all .25s ease-out;
 
 	&[data-state="collapsed"] {
 		width: 1em;
@@ -186,7 +44,192 @@ aside.left-sidebar {
 		}
 	}
 
-	transition: all .25s ease-out;
+	// Titles, Numbers
+
+	.toc-titles {
+		width: calc(100% - #{$toc_toggles_width} - #{$spacer-4}); 
+		display: block;
+		float: left;
+		border-radius: $border-radius;
+		margin: $spacer-1 $spacer-2;
+
+		h3 {
+			margin: $spacer-1 $spacer-1 $spacer-1 $spacer-2;
+		}
+	}
+
+	.subpart-range {
+		font-size: $font-size-sm;
+	}
+
+	.subpart-name {
+		font-size: $font-size-sm;
+		font-weight: normal;
+		color: $reverse_text_color;
+		padding-right: $spacer-4;
+	}
+
+	.toc-section-number {
+		font-size: $font-size-sm;
+	}
+
+	.toc-section-name {
+		color: $reverse_text_color;
+		font-weight: normal;
+		font-size: $font-size-sm;
+	}
+
+	// Toggle Icons
+
+	.toc-toggles {
+		width: $toc_toggles_width;			
+		display: block;
+		float: left;
+
+		&:hover {
+			span {
+				color: $reverse_link_hover;
+				@include transition;
+			}
+		}
+
+		span {
+			color: $reverse_link_color;
+			cursor: pointer;
+			margin-top: 4px;
+			display: block;
+			padding: $spacer-2;  // Helps users by making the toggle target bigger, ~42px square
+
+			&[data-set-state="expanded"][data-state="expanded"] {
+				display: none;
+			}
+			&[data-set-state="collapsed"][data-state="collapsed"] {
+				display: none;
+			}
+		}
+
+		span:focus-visible {
+			outline: 2px solid black;
+		}
+	}
+
+	// Ridiculous Nested Lists and Links
+
+	ul {
+		padding: 0  0 $spacer-2 0;
+
+		li {
+			list-style: none;
+			overflow: hidden;
+
+			&.active {
+				background: $reverse_background_darker;
+
+				.subpart-info {
+					color: $reverse_text_color;
+				}
+			}
+
+			a {
+				text-decoration: none;
+				font-weight: bold;
+			}
+
+			&.orphan {
+				.menu-section {
+					margin-left: $spacer-2;
+					padding-left: $spacer-2;
+				}
+			}
+
+			&.subtoc {
+				transition-property: max-height;
+				transition-duration: 1s;
+				transition-timing-function: ease-in;
+				max-height: 200vh;
+
+				&.active {
+					background: $reverse_background_darker;	
+				}					
+			
+				&[data-state="collapsed"] {
+					max-height: 0;
+				}
+			}
+		}
+	}
+
+	a {
+		color: $reverse_link_color;
+
+		&:hover {
+			color: $reverse_link_hover;
+		}
+
+		&.subpart-info:hover {
+
+			.toc-titles {
+				background: $reverse_background_lighter;
+				@include transition;
+			}
+		}
+
+		&.menu-section {
+			display: block;
+			padding: $spacer-1 $spacer-4 $spacer-1 $spacer-4;
+			margin: 0 $spacer-2;
+			border-radius: $border-radius;
+
+			&:not(li.active ul a.menu-section) {
+				background: $reverse_background_color;
+
+				&:hover {
+					background: $reverse_background_lighter;
+				}
+			}
+
+			li {
+				padding: 0 $spacer-2;
+			}
+		}
+	}
+
+	li.active ul a.menu-section:hover {
+		background: $reverse_background_lighter;
+	}
+}
+
+// Controls (i.e. Collapse)
+
+.toc-controls {
+	border-bottom: 1px solid $secondary_border_color;
+	padding-bottom: $spacer-2;
+
+	button {
+		outline: none;
+		color: $reverse_link_color;
+		border: none;
+		background: none;
+		margin-left: $spacer-3;
+		cursor: pointer;
+		text-transform: uppercase;
+		font-weight: 600;
+
+		&:hover {
+			color: $reverse_link_hover;
+			@include transition;
+		}
+
+		img {
+			height: $base-font-size;
+			padding-right: 5px;
+		}
+
+		&[data-set-state="expanded"] {
+			margin: 0 auto;
+			display: none;
+		}
+	}
 }
 
 // Jump To Regulation Section
