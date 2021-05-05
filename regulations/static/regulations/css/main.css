@@ -13975,11 +13975,9 @@ aside.left-sidebar[data-state=collapsed] div.toc-controls [data-set-state=expand
   display: block;
 }
 aside.left-sidebar .toc-titles {
-  width: calc(100% - 64px - 32px);
-  display: block;
-  float: left;
   border-radius: 3px;
-  margin: 8px 16px;
+  padding: 8px 0;
+  margin: 0 16px;
 }
 aside.left-sidebar .toc-titles h3 {
   margin: 8px 8px 8px 16px;
@@ -14003,11 +14001,11 @@ aside.left-sidebar .toc-section-name {
 }
 aside.left-sidebar .toc-toggles {
   width: 64px;
-  display: block;
-  float: left;
+  display: table-cell;
 }
 aside.left-sidebar .toc-toggles:hover span {
   color: #fff;
+  background: #205982;
   transition: all 0.1s ease-in;
 }
 aside.left-sidebar .toc-toggles span {
@@ -14016,15 +14014,14 @@ aside.left-sidebar .toc-toggles span {
   margin-top: 4px;
   display: block;
   padding: 16px;
+  margin-right: 16px;
+  border-radius: 3px;
 }
 aside.left-sidebar .toc-toggles span[data-set-state=expanded][data-state=expanded] {
   display: none;
 }
 aside.left-sidebar .toc-toggles span[data-set-state=collapsed][data-state=collapsed] {
   display: none;
-}
-aside.left-sidebar .toc-toggles span:focus-visible {
-  outline: 2px solid black;
 }
 aside.left-sidebar ul {
   padding: 0 0 16px 0;
@@ -14064,6 +14061,10 @@ aside.left-sidebar a {
 }
 aside.left-sidebar a:hover {
   color: #fff;
+}
+aside.left-sidebar a.subpart-info {
+  display: table-cell;
+  width: calc(100% - 64px);
 }
 aside.left-sidebar a.subpart-info:hover .toc-titles {
   background: #205982;

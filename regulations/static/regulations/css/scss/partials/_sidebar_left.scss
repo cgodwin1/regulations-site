@@ -47,11 +47,9 @@ aside.left-sidebar {
 	// Titles, Numbers
 
 	.toc-titles {
-		width: calc(100% - #{$toc_toggles_width} - #{$spacer-4}); 
-		display: block;
-		float: left;
 		border-radius: $border-radius;
-		margin: $spacer-1 $spacer-2;
+		padding: $spacer-1 0;
+		margin: 0 $spacer-2;
 
 		h3 {
 			margin: $spacer-1 $spacer-1 $spacer-1 $spacer-2;
@@ -83,12 +81,12 @@ aside.left-sidebar {
 
 	.toc-toggles {
 		width: $toc_toggles_width;			
-		display: block;
-		float: left;
+		display: table-cell;
 
 		&:hover {
 			span {
 				color: $reverse_link_hover;
+				background: $reverse_background_lighter;
 				@include transition;
 			}
 		}
@@ -99,17 +97,16 @@ aside.left-sidebar {
 			margin-top: 4px;
 			display: block;
 			padding: $spacer-2;  // Helps users by making the toggle target bigger, ~42px square
+			margin-right: $spacer-2;
+			border-radius: $border-radius;
 
 			&[data-set-state="expanded"][data-state="expanded"] {
 				display: none;
 			}
+
 			&[data-set-state="collapsed"][data-state="collapsed"] {
 				display: none;
 			}
-		}
-
-		span:focus-visible {
-			outline: 2px solid black;
 		}
 	}
 
@@ -136,6 +133,7 @@ aside.left-sidebar {
 			}
 
 			&.orphan {
+
 				.menu-section {
 					margin-left: $spacer-2;
 					padding-left: $spacer-2;
@@ -166,11 +164,16 @@ aside.left-sidebar {
 			color: $reverse_link_hover;
 		}
 
-		&.subpart-info:hover {
+		&.subpart-info {
+			display: table-cell;
+			width: calc(100% - #{$toc_toggles_width});
 
-			.toc-titles {
-				background: $reverse_background_lighter;
-				@include transition;
+			&:hover {
+
+				.toc-titles {
+					background: $reverse_background_lighter;
+					@include transition;
+				}
 			}
 		}
 
