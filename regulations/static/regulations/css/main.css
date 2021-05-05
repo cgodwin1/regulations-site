@@ -13542,6 +13542,7 @@ aside.left-sidebar {
   display: table-cell;
   width: 400px;
   background: #17415F;
+  flex-shrink: 0;
 }
 aside.right-sidebar {
   display: table-cell;
@@ -13973,6 +13974,9 @@ aside.left-sidebar[data-state=collapsed] div.toc-controls [data-set-state=collap
 }
 aside.left-sidebar[data-state=collapsed] div.toc-controls [data-set-state=expanded] {
   display: block;
+}
+aside.left-sidebar[data-state=collapsed] ul li.subtoc.active {
+  background: none;
 }
 aside.left-sidebar .toc-titles {
   border-radius: 3px;

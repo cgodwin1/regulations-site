@@ -21,6 +21,8 @@ aside.left-sidebar {
 	padding-right: 0;
 	transition: all .25s ease-out;
 
+	// Collapsed
+
 	&[data-state="collapsed"] {
 		width: 1em;
 		padding: 1em;
@@ -42,6 +44,10 @@ aside.left-sidebar {
 				display: block;
 			}
 		}
+
+		ul li.subtoc.active {
+    		background: none;
+    	}
 	}
 
 	// Titles, Numbers

@@ -42,6 +42,7 @@ aside {
         display: table-cell;
         width: 400px;
         background: $reverse_background_color;
+        flex-shrink: 0;
     }
 
     &.right-sidebar {
