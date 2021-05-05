@@ -13957,13 +13957,12 @@ aside.left-sidebar {
   transition: all 0.25s ease-out;
 }
 aside.left-sidebar .toc-titles {
-  width: calc(100% - 48px);
+  width: calc(100% - 64px);
   display: block;
   float: left;
-  padding-right: 8px;
 }
 aside.left-sidebar .toc-toggles {
-  width: 40px;
+  width: 64px;
   display: block;
   float: left;
 }
@@ -13972,13 +13971,11 @@ aside.left-sidebar .toc-toggles:hover span {
   transition: all 0.1s ease-in;
 }
 aside.left-sidebar .toc-toggles span {
-  border: none;
-  background: none;
   color: #A3E8FF;
   cursor: pointer;
-  outline: none;
-  margin-top: 24px;
+  margin-top: 8px;
   display: block;
+  padding: 16px;
 }
 aside.left-sidebar .toc-toggles span[data-set-state=expanded][data-state=expanded] {
   display: none;

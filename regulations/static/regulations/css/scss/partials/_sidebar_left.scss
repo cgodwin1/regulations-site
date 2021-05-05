@@ -15,14 +15,13 @@ aside.left-sidebar {
 	padding-right: 0;
 
 	.toc-titles {
-		width: calc(100% - 48px);
+		width: calc(100% - 64px);
 		display: block;
 		float: left;
-		padding-right: $spacer-1;
 	}
 
 	.toc-toggles {
-		width: 40px;
+		width: 64px;
 		display: block;
 		float: left;
 
@@ -34,13 +33,11 @@ aside.left-sidebar {
 		}
 
 		span {
-			border: none;
-			background: none;
 			color: $reverse_link_color;
 			cursor: pointer;
-			outline: none;
-			margin-top: $spacer-3;
+			margin-top: $spacer-1;
 			display: block;
+			padding: $spacer-2;  // Helps users by making the toggle target bigger, ~42px square
 
 			&[data-set-state="expanded"][data-state="expanded"] {
 				display: none;
