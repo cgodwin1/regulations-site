@@ -14006,7 +14006,7 @@ aside.left-sidebar ul li {
 aside.left-sidebar ul li.active {
   background: #102E43;
 }
-aside.left-sidebar ul li.active .subpart-letter {
+aside.left-sidebar ul li.active .subpart-info {
   color: #fff;
 }
 aside.left-sidebar ul li h3 {
@@ -14031,9 +14031,6 @@ aside.left-sidebar ul li.subtoc.active {
 }
 aside.left-sidebar ul li.subtoc[data-state=collapsed] {
   max-height: 0;
-}
-aside.left-sidebar .subpart-letter {
-  cursor: pointer;
 }
 aside.left-sidebar .subpart-range {
   font-size: 14px;
