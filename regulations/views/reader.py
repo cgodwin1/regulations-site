@@ -28,16 +28,18 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         reg_version = context["version"]
         reg_part = context["part"]
         tree = self.client.v2_part(reg_version, 42, reg_part)
+        structure = tree['structure']['children'][0]['children'][0]['children'][0]
 
         c = {
-            'tree':         tree['document'],
+            'tree':         self.get_content(context, tree),
             'reg_part':     reg_part,
-            'structure':    tree['structure']['children'][0]['children'][0]['children'][0],
+            'structure':    structure,
         }
 
         links = {}
 
         return {**context, **c, **links}
+
 
     def get_regulation(self, label_id, version):
         regulation = self.client.regulation(label_id, version)
@@ -53,6 +55,9 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         if versions is None:
             raise Http404
         return versions['versions']
+
+    def get_content(self, context, tree):
+        return tree['document']
 
 
 class PartReaderView(ReaderView):
@@ -75,6 +80,7 @@ class SubpartReaderView(ReaderView):
         part = context['part']
         version = context['version']
         subpart = context['subpart']
+
         section = utils.find_subpart_first_section(subpart, toc)
         if section is None:
             section = utils.first_section(part, version)
@@ -83,6 +89,22 @@ class SubpartReaderView(ReaderView):
         return {
             'part_view_link': reverse('reader_view', args=(part, version)) + '#' + citation,
         }
+
+    def get_content(self, context, tree):
+        # using tree['structure'] find subpart requested then extract that data
+        subpart = context['subpart']
+        subpart_level = tree['structure']['children'][0]['children'][0]['children'][0]
+        subpart_index = -1
+
+        for i in range(len(subpart_level['children'])):
+            child = subpart_level['children'][i]
+            if child['type'] == 'subpart' and "Subpart-{}".format(child['identifier'][0]) == subpart:
+                subpart_index = i
+
+        if subpart_index == -1:
+            raise Http404
+
+        return tree['document']['children'][subpart_index]
 
 
 class SectionReaderView(TableOfContentsMixin, View):
