@@ -21,7 +21,7 @@
     </form>
 </div>
 
-
+<nav role="navigation">
     <ul>
         {% for item in structure.children %}
             {% if item.type == "section" %}
@@ -31,3 +31,4 @@
             {% endif %}
         {% endfor %}
     </ul>
+</nav>
