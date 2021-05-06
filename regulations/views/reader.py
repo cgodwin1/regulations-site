@@ -27,27 +27,16 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         # answering the question: what are we looking at?
         reg_version = context["version"]
         reg_part = context["part"]
-        citation = context["citation"]
-        reg_citation = "-".join(citation)
-        toc = self.get_toc(reg_part, reg_version)
-        meta = utils.regulation_meta(reg_part, reg_version)
-        tree = self.get_regulation(reg_citation, reg_version)
-        versions = self.get_versions(reg_part)
-
-        if not meta:
-            raise Http404
+        tree = self.client.v2_part(reg_version, 42, reg_part)
+        structure = tree['structure']['children'][0]['children'][0]['children'][0]
 
         c = {
-            'tree':         tree,
-            'versions':     versions,
-            'citation':     citation,
+            'tree':         tree['document'],
             'reg_part':     reg_part,
-            'meta':         meta,
-            'TOC':          toc,
+            'structure':    structure,
         }
 
-        links = self.get_view_links(context, toc)
-        self.set_expanded_state(context, toc)
+        links = {}
 
         return {**context, **c, **links}
 
@@ -67,12 +56,10 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
             raise Http404
         return versions['versions']
 
-    def set_expanded_state(self, context, toc):
-        pass
-
 
 class PartReaderView(ReaderView):
     def get_view_links(self, context, toc):
+        return {}
         part = context['part']
         version = context['version']
         first_subpart = utils.first_subpart(part, version)
@@ -99,12 +86,6 @@ class SubpartReaderView(ReaderView):
         return {
             'part_view_link': reverse('reader_view', args=(part, version)) + '#' + citation,
         }
-
-    def set_expanded_state(self, context, toc):
-        for el in toc:
-            if 'index' in el:
-                if 'Subpart' in el['index']:
-                    el['expanded'] = '-'.join(el['index'][1:]) == context['subpart']
 
 
 class SectionReaderView(TableOfContentsMixin, View):

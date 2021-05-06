@@ -13616,30 +13616,26 @@ html {
   font-size: 1.7em;
 }
 
+.subchapter {
+  border-bottom: 1px solid #D6D7D9;
+  padding: 1em 0;
+}
+
 .part-names {
   display: block;
   margin: 1em 0;
   padding: 0;
 }
-.part-names li {
-  border-bottom: 1px solid #D6D7D9;
-  list-style: none;
-  margin: 0;
-  padding: 1em 0;
-}
-.part-names li:last-of-type {
-  border: 0;
-}
-.part-names li a {
+.part-names a {
   text-decoration: none;
   font-size: 1.2em;
 }
-.part-names li .part-number {
+.part-names a .part-number {
   font-weight: bold;
   display: table-cell;
   padding-right: 0.3em;
 }
-.part-names li .part-title {
+.part-names a .part-title {
   display: table-cell;
 }
 
@@ -14074,19 +14070,19 @@ aside.left-sidebar a.subpart-info:hover .toc-titles {
   background: #205982;
   transition: all 0.1s ease-in;
 }
-aside.left-sidebar a.menu-section {
+aside.left-sidebar .menu-section {
   display: block;
   padding: 8px 32px 8px 32px;
   margin: 0 16px;
   border-radius: 3px;
 }
-aside.left-sidebar a.menu-section:not(li.active ul a.menu-section) {
+aside.left-sidebar .menu-section:not(li.active ul a.menu-section) {
   background: #17415F;
 }
-aside.left-sidebar a.menu-section:not(li.active ul a.menu-section):hover {
+aside.left-sidebar .menu-section:not(li.active ul a.menu-section):hover {
   background: #205982;
 }
-aside.left-sidebar a.menu-section li {
+aside.left-sidebar .menu-section li {
   padding: 0 16px;
 }
 aside.left-sidebar li.active ul a.menu-section:hover {

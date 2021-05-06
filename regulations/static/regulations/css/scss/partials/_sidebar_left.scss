@@ -139,7 +139,6 @@ aside.left-sidebar {
 			}
 
 			&.orphan {
-
 				.menu-section {
 					margin-left: $spacer-2;
 					padding-left: $spacer-2;
@@ -182,24 +181,24 @@ aside.left-sidebar {
 				}
 			}
 		}
+	}
 
-		&.menu-section {
-			display: block;
-			padding: $spacer-1 $spacer-4 $spacer-1 $spacer-4;
-			margin: 0 $spacer-2;
-			border-radius: $border-radius;
+	.menu-section {
+		display: block;
+		padding: $spacer-1 $spacer-4 $spacer-1 $spacer-4;
+		margin: 0 $spacer-2;
+		border-radius: $border-radius;
 
-			&:not(li.active ul a.menu-section) {
-				background: $reverse_background_color;
+		&:not(li.active ul a.menu-section) {
+			background: $reverse_background_color;
 
-				&:hover {
-					background: $reverse_background_lighter;
-				}
+			&:hover {
+				background: $reverse_background_lighter;
 			}
+		}
 
-			li {
-				padding: 0 $spacer-2;
-			}
+		li {
+			padding: 0 $spacer-2;
 		}
 	}
 
