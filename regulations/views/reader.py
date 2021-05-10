@@ -126,14 +126,12 @@ class SectionReaderView(TableOfContentsMixin, View):
         }
 
         client = api_reader.ApiReader()
-        tree = self.client.v2_part(url_kwargs['version'], 42, url_kwargs['part'])
+        tree = client.v2_part(url_kwargs['version'], 42, url_kwargs['part'])
         structure = tree['structure']['children'][0]['children'][0]['children'][0]
 
-        toc = self.get_toc(kwargs.get("part"), kwargs.get("version"))
-        subpart = find_subpart(kwargs.get("section"), toc)
-
+        subpart = find_subpart(kwargs.get("section"), structure)
         if subpart is not None:
-            url_kwargs["subpart"] = subpart
+            url_kwargs["subpart"] = "Subpart-{}".format(subpart)
 
         url = reverse("reader_view", kwargs=url_kwargs)
         return HttpResponseRedirect(url)

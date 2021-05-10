@@ -2,13 +2,15 @@ from datetime import date
 from requests import HTTPError
 from django.views.generic.base import TemplateView
 from django.http import Http404
+from django.urls import reverse
 
+from regulations.views.mixins import TableOfContentsMixin
 from regulations.generator import api_reader
 
 client = api_reader.ApiReader()
 
 
-class RegulationLandingView(TemplateView):
+class RegulationLandingView(TableOfContentsMixin, TemplateView):
 
     template_name = "regulations/regulation_landing.html"
 
@@ -24,9 +26,10 @@ class RegulationLandingView(TemplateView):
             raise Http404
 
         reg_version = current['date']
+        structure = current['structure']['children'][0]['children'][0]['children'][0]
 
         c = {
-            'structure': current['structure']['children'][0]['children'][0]['children'][0],
+            'structure': structure,
             'version': reg_version,
             'part': reg_part,
             'content': [
@@ -34,7 +37,14 @@ class RegulationLandingView(TemplateView):
                 'regulations/partials/landing_default.html',
             ],
         }
+
+        self.build_toc_urls(c, structure)
+
         return {**context, **c}
 
-    def get_toc(self, part, date):
-        return {}
+    def build_toc_url(self, context, node):
+        part = context['part']
+        version = context['version']
+        subpart = "Subpart-{}".format(node['identifier'][0] if node['type'] == 'subpart' else node['parent_subpart'])
+        return reverse('reader_view', args=(part, subpart, version))
+
