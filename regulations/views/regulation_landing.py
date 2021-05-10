@@ -43,8 +43,15 @@ class RegulationLandingView(TableOfContentsMixin, TemplateView):
         return {**context, **c}
 
     def build_toc_url(self, context, node):
-        part = context['part']
-        version = context['version']
-        subpart = "Subpart-{}".format(node['identifier'][0] if node['type'] == 'subpart' else node['parent_subpart'])
-        return reverse('reader_view', args=(part, subpart, version))
+        url_kwargs = {
+            'part': context['part'],
+            'version': context['version'],
+        }
+
+        if node['type'] == 'subpart':
+            url_kwargs['subpart'] = 'Subpart-{}'.format(node['identifier'][0])
+        elif node['parent_subpart'] is not "":
+            url_kwargs['subpart'] = 'Subpart-{}'.format(node['parent_subpart'])
+
+        return reverse('reader_view', kwargs=url_kwargs)
 
