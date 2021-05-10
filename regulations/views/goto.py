@@ -1,3 +1,5 @@
+from requests import HTTPError
+
 from django.urls import reverse
 from django.http import Http404
 from django.views.generic.base import RedirectView

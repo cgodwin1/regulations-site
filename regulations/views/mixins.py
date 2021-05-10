@@ -1,5 +1,4 @@
 from importlib import import_module
-from requests import HTTPError
 
 import six
 from django.conf import settings
