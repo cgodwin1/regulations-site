@@ -21,12 +21,12 @@ class RegulationLandingView(TableOfContentsMixin, TemplateView):
         reg_part = self.kwargs.get("part")
 
         try:
-            current = client.v2_part(date.today(), 42, reg_part)
+            current = client.v2_structure(date.today(), 42, reg_part)
         except HTTPError:
             raise Http404
 
         reg_version = current['date']
-        structure = current['structure']['children'][0]['children'][0]['children'][0]
+        structure = current['structure']
 
         c = {
             'structure': structure,

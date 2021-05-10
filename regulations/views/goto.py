@@ -25,10 +25,9 @@ class GoToRedirectView(TableOfContentsMixin, RedirectView):
         }
 
         try:
-            tree = client.v2_part(url_kwargs['version'], 42, url_kwargs['part'])
+            structure = client.v2_structure(url_kwargs['version'], 42, url_kwargs['part'])['structure']
         except HTTPError:
             raise Http404
-        structure = tree['structure']['children'][0]['children'][0]['children'][0]
 
         try:
             subpart = find_subpart(kwargs.get("section"), structure)

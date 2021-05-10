@@ -27,10 +27,8 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         reg_part = context["part"]
         tree = self.client.v2_part(reg_version, 42, reg_part)
 
-        structure = tree['structure']['children'][0]['children'][0]['children'][0]
         document = tree['document']
-
-        self.build_toc_urls(context, structure)
+        structure = self.get_toc(context, tree['structure'])
 
         c = {
             'tree':         self.get_content(context, document, structure),
@@ -132,8 +130,8 @@ class SectionReaderView(TableOfContentsMixin, View):
         }
 
         client = api_reader.ApiReader()
-        tree = client.v2_part(url_kwargs['version'], 42, url_kwargs['part'])
-        structure = tree['structure']['children'][0]['children'][0]['children'][0]
+        tree = client.v2_structure(url_kwargs['version'], 42, url_kwargs['part'])
+        structure = tree['structure']
 
         subpart = find_subpart(kwargs.get("section"), structure)
         if subpart is not None:

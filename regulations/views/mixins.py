@@ -54,6 +54,11 @@ class SidebarContextMixin():
 
 
 class TableOfContentsMixin:
+    def get_toc(self, context, structure):
+        new_structure = structure['children'][0]['children'][0]['children'][0]
+        self.build_toc_urls(context, new_structure)
+        return new_structure
+
     def build_toc_urls(self, context, structure):
         if any(structure['type'] == x for x in ['subpart', 'section', 'subject_group']):
             try:
