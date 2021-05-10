@@ -2,7 +2,6 @@
 import itertools
 import logging
 
-from regulations.views.errors import NotInSubpart
 from regulations.generator import api_reader
 from regulations.generator.utils import roman_nums, convert_to_python
 from regulations.generator.toc import fetch_toc
@@ -59,7 +58,7 @@ def find_subpart(section, structure):
             value = find_subpart(section, child)
             if value is not None:
                 return value
-    
+
     return None
 
 

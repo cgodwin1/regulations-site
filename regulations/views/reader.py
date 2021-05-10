@@ -42,7 +42,6 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
 
         return {**context, **c, **links}
 
-
     def get_regulation(self, label_id, version):
         regulation = self.client.regulation(label_id, version)
         if regulation is None:

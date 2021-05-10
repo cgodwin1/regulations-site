@@ -1,11 +1,11 @@
 from importlib import import_module
+from requests import HTTPError
 
 import six
 from django.conf import settings
-from django.urls import reverse, NoReverseMatch
+from django.urls import NoReverseMatch
 
 from regulations.generator import api_reader
-from regulations.generator.toc import fetch_toc
 
 
 def build_citation(context):
@@ -68,4 +68,3 @@ class TableOfContentsMixin:
 
     def build_toc_url(self, context, node):
         raise NotImplementedError()
-            

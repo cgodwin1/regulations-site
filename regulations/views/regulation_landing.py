@@ -54,4 +54,3 @@ class RegulationLandingView(TableOfContentsMixin, TemplateView):
             url_kwargs['subpart'] = 'Subpart-{}'.format(node['parent_subpart'])
 
         return reverse('reader_view', kwargs=url_kwargs)
-
