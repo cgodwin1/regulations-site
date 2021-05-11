@@ -6,6 +6,8 @@ from django.urls import reverse
 
 from regulations.views.mixins import TableOfContentsMixin
 from regulations.generator import api_reader
+from regulations.views.errors import NotInSubpart
+from regulations.views.utils import find_subpart
 
 client = api_reader.ApiReader()
 
@@ -21,15 +23,15 @@ class RegulationLandingView(TableOfContentsMixin, TemplateView):
         reg_part = self.kwargs.get("part")
 
         try:
-            current = client.v2_structure(date.today(), 42, reg_part)
+            current = client.v2_toc(date.today(), 42, reg_part)
         except HTTPError:
             raise Http404
 
         reg_version = current['date']
-        structure = current['structure']
+        toc = current['toc']
 
         c = {
-            'structure': structure,
+            'toc': toc,
             'version': reg_version,
             'part': reg_part,
             'content': [
@@ -38,11 +40,11 @@ class RegulationLandingView(TableOfContentsMixin, TemplateView):
             ],
         }
 
-        self.build_toc_urls(c, structure)
+        self.build_toc_urls(c, toc)
 
         return {**context, **c}
 
-    def build_toc_url(self, context, node):
+    def build_toc_url(self, context, toc, node):
         url_kwargs = {
             'part': context['part'],
             'version': context['version'],
@@ -50,7 +52,12 @@ class RegulationLandingView(TableOfContentsMixin, TemplateView):
 
         if node['type'] == 'subpart':
             url_kwargs['subpart'] = 'Subpart-{}'.format(node['identifier'][0])
-        elif node['parent_subpart'] is not "":
-            url_kwargs['subpart'] = 'Subpart-{}'.format(node['parent_subpart'])
+        elif node['type'] == 'section':
+            try:
+                subpart = find_subpart(node['identifier'][1], toc)
+                if subpart is not None:
+                    url_kwargs['subpart'] = 'Subpart-{}'.format(subpart)    
+            except NotInSubpart:
+                pass
 
         return reverse('reader_view', kwargs=url_kwargs)

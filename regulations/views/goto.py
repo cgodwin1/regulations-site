@@ -25,12 +25,12 @@ class GoToRedirectView(TableOfContentsMixin, RedirectView):
         }
 
         try:
-            structure = client.v2_structure(url_kwargs['version'], 42, url_kwargs['part'])['structure']
+            toc = client.v2_toc(url_kwargs['version'], 42, url_kwargs['part'])['toc']
         except HTTPError:
             raise Http404
 
         try:
-            subpart = find_subpart(kwargs.get("section"), structure)
+            subpart = find_subpart(kwargs.get("section"), toc)
             if subpart is None:
                 raise Http404()
             url_kwargs["subpart"] = "Subpart-{}".format(subpart)

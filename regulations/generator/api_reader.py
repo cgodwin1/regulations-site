@@ -39,8 +39,8 @@ class ApiReader(object):
     def v2_part(self, date, title, part):
         return self._get("v2/{}/title/{}/part/{}".format(date, title, part))
 
-    def v2_structure(self, date, title, part):
-        return self._get("v2/{}/title/{}/part/{}/structure".format(date, title, part))
+    def v2_toc(self, date, title, part):
+        return self._get("v2/{}/title/{}/part/{}/toc".format(date, title, part))
 
     def v2_search(self, query, **kwargs):
         """Search via the API. Never cache these (that's the duty of the search

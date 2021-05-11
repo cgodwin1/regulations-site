@@ -10,6 +10,7 @@ from regulations.generator import api_reader
 from regulations.views import utils
 from regulations.views.mixins import SidebarContextMixin, CitationContextMixin, TableOfContentsMixin
 from regulations.views.utils import find_subpart
+from regulations.views.errors import NotInSubpart
 
 
 class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin, TemplateView):
@@ -26,14 +27,16 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         reg_version = context["version"]
         reg_part = context["part"]
         tree = self.client.v2_part(reg_version, 42, reg_part)
-
         document = tree['document']
-        structure = self.get_toc(context, tree['structure'])
+        structure = tree['structure']
+        toc = tree['toc']
+
+        self.build_toc_urls(context, toc)
 
         c = {
-            'tree':         self.get_content(context, document, structure),
+            'tree':         self.get_content(context, document, toc),
             'reg_part':     reg_part,
-            'structure':    structure,
+            'toc':    toc,
         }
 
         links = {}
@@ -55,7 +58,7 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
             raise Http404
         return versions['versions']
 
-    def get_content(self, context, document, structure):
+    def get_content(self, context, document, toc):
         raise NotImplementedError()
 
 
@@ -70,7 +73,7 @@ class PartReaderView(ReaderView):
             'subpart_view_link': reverse('reader_view', args=(part, first_subpart, version)),
         }
 
-    def build_toc_url(self, context, node):
+    def build_toc_url(self, context, toc, node):
         return reverse('reader_view', args=(context['part'], context['version']))
 
     def get_content(self, context, document, structure):
@@ -92,13 +95,13 @@ class SubpartReaderView(ReaderView):
             'part_view_link': reverse('reader_view', args=(part, version)) + '#' + citation,
         }
 
-    def get_content(self, context, document, structure):
+    def get_content(self, context, document, toc):
         # using tree['structure'] find subpart requested then extract that data
         subpart = context['subpart']
         subpart_index = -1
 
-        for i in range(len(structure['children'])):
-            child = structure['children'][i]
+        for i in range(len(toc['children'])):
+            child = toc['children'][i]
             if 'type' in child and 'identifier' in child:
                 if child['type'] == 'subpart' and "Subpart-{}".format(child['identifier'][0]) == subpart:
                     subpart_index = i
@@ -108,7 +111,7 @@ class SubpartReaderView(ReaderView):
 
         return document['children'][subpart_index]
 
-    def build_toc_url(self, context, node):
+    def build_toc_url(self, context, toc, node):
         url_kwargs = {
             'part': context['part'],
             'version': context['version'],
@@ -116,8 +119,13 @@ class SubpartReaderView(ReaderView):
 
         if node['type'] == 'subpart':
             url_kwargs['subpart'] = 'Subpart-{}'.format(node['identifier'][0])
-        elif node['parent_subpart'] is not "":
-            url_kwargs['subpart'] = 'Subpart-{}'.format(node['parent_subpart'])
+        elif node['type'] == 'section':
+            try:
+                subpart = find_subpart(node['identifier'][1], toc)
+                if subpart is not None:
+                    url_kwargs['subpart'] = 'Subpart-{}'.format(subpart)    
+            except NotInSubpart:
+                pass
 
         return reverse('reader_view', kwargs=url_kwargs)
 
@@ -130,10 +138,9 @@ class SectionReaderView(TableOfContentsMixin, View):
         }
 
         client = api_reader.ApiReader()
-        tree = client.v2_structure(url_kwargs['version'], 42, url_kwargs['part'])
-        structure = tree['structure']
+        toc = client.v2_toc(url_kwargs['version'], 42, url_kwargs['part'])['toc']
 
-        subpart = find_subpart(kwargs.get("section"), structure)
+        subpart = find_subpart(kwargs.get("section"), toc)
         if subpart is not None:
             url_kwargs["subpart"] = "Subpart-{}".format(subpart)
 

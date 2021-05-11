@@ -5,6 +5,7 @@ import logging
 from regulations.generator import api_reader
 from regulations.generator.utils import roman_nums, convert_to_python
 from regulations.generator.toc import fetch_toc
+from regulations.views.errors import NotInSubpart
 
 
 logger = logging.getLogger(__name__)
@@ -49,17 +50,23 @@ def first_subpart(reg_part, version):
     return None
 
 
-def find_subpart(section, structure):
-    if structure['type'] == 'section' and structure['identifier'][1] == section:
-        return structure['parent_subpart']
-
-    if structure['children'] is not None:
-        for child in structure['children']:
-            value = find_subpart(section, child)
+def find_subpart(section, node, subpart=None):
+    value = None
+    if node['type'] == 'section' and node['identifier'][1] == section:
+        if subpart is None:
+            raise NotInSubpart()
+        return subpart
+    elif node['type'] == 'subpart' and node['children'] is not None:
+        for child in node['children']:
+            value = find_subpart(section, child, node['identifier'][0])
             if value is not None:
-                return value
-
-    return None
+                break
+    elif node['children'] is not None:
+        for child in node['children']:
+            value = find_subpart(section, child, subpart)
+            if value is not None:
+                break
+    return value
 
 
 def find_subpart_first_section(subpart, toc):
