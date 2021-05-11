@@ -28,7 +28,6 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         reg_part = context["part"]
         tree = self.client.v2_part(reg_version, 42, reg_part)
         document = tree['document']
-        structure = tree['structure']
         toc = tree['toc']
 
         self.build_toc_urls(context, toc)
@@ -36,7 +35,7 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         c = {
             'tree':         self.get_content(context, document, toc),
             'reg_part':     reg_part,
-            'toc':    toc,
+            'toc':          toc,
         }
 
         links = {}
@@ -123,7 +122,7 @@ class SubpartReaderView(ReaderView):
             try:
                 subpart = find_subpart(node['identifier'][1], toc)
                 if subpart is not None:
-                    url_kwargs['subpart'] = 'Subpart-{}'.format(subpart)    
+                    url_kwargs['subpart'] = 'Subpart-{}'.format(subpart)
             except NotInSubpart:
                 pass
 

@@ -56,7 +56,7 @@ class RegulationLandingView(TableOfContentsMixin, TemplateView):
             try:
                 subpart = find_subpart(node['identifier'][1], toc)
                 if subpart is not None:
-                    url_kwargs['subpart'] = 'Subpart-{}'.format(subpart)    
+                    url_kwargs['subpart'] = 'Subpart-{}'.format(subpart)
             except NotInSubpart:
                 pass
 
