@@ -23,7 +23,7 @@
 
 <nav role="navigation">
     <ul>
-        {% for item in structure.children %}
+        {% for item in toc.children %}
             {% if item.type == "section" %}
                 {% include "regulations/partials/toc_section.html" with extra_class="orphan" %}
             {% else %}

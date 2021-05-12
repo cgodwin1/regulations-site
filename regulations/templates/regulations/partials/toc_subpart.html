@@ -1,6 +1,6 @@
 <li data-state="{{ collapse_state }}" data-state-name="{{item.type}}-{{item.identifier.0}}" id="{{item.type}}-{{item.identifier.0}}" class="section-subpart {% if item.expanded %}active{% endif %}" tabindex="0">
     <div class="flexbox">
-        <a class="subpart-info"> <!-- This is what should link to a new page that is the top of the relevant subpart -->
+        <a href="{{ item.url }}" class="subpart-info"> <!-- This is what should link to a new page that is the top of the relevant subpart -->
             <div class="toc-titles">
                 <h3 data-section-id="{{item.type}}-{{item.identifier.0}}" id="nav-{{item.type}}-{{item.identifier.0}}">
                     <span class="subpart-letter">{{item.label_level|safe}}</span> 
