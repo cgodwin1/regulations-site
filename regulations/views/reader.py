@@ -27,6 +27,7 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         reg_version = context["version"]
         reg_part = context["part"]
         tree = self.client.v2_part(reg_version, 42, reg_part)
+        versions = self.get_versions(42, reg_part)
         document = tree['document']
         toc = tree['toc']
 
@@ -36,6 +37,7 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
             'tree':         self.get_content(context, document, toc),
             'reg_part':     reg_part,
             'toc':          toc,
+            'versions':     versions,
         }
 
         links = {}
@@ -51,11 +53,11 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
     def get_view_links(self, context, toc):
         raise NotImplementedError()
 
-    def get_versions(self, label_id):
-        versions = self.client.regversions(label_id)
+    def get_versions(self, title, part):
+        versions = self.client.v2_regversions(title, part)
         if versions is None:
             raise Http404
-        return versions['versions']
+        return versions
 
     def get_content(self, context, document, toc):
         raise NotImplementedError()
