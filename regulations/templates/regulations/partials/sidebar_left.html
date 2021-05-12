@@ -26,8 +26,14 @@
         {% for item in toc.children %}
             {% if item.type == "section" %}
                 {% include "regulations/partials/toc_section.html" with extra_class="orphan" %}
-            {% else %}
-                {% include "regulations/partials/toc_subpart.html" with collapse_state="expanded" %}
+            {% elif item.type == "subpart" %}
+                {% with item_subpart="Subpart-"|add:item.identifier.0 %}
+                    {% if subpart and item_subpart != subpart %}
+                        {% include "regulations/partials/toc_subpart.html" with collapse_state="collapsed" %}
+                    {% else %}
+                        {% include "regulations/partials/toc_subpart.html" with collapse_state="expanded" %}
+                    {% endif %}
+                {% endwith %}
             {% endif %}
         {% endfor %}
     </ul>
