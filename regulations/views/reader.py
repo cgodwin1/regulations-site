@@ -26,7 +26,7 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
 
         reg_version = context["version"]
         reg_part = context["part"]
-        tree = self.client.v2_part(reg_version, 42, reg_part)
+        tree = self.client.part(reg_version, 42, reg_part)
         versions = self.get_versions(42, reg_part)
         document = tree['document']
         toc = tree['toc']
@@ -54,7 +54,7 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
         raise NotImplementedError()
 
     def get_versions(self, title, part):
-        versions = self.client.v2_regversions(title, part)
+        versions = self.client.regversions(title, part)
         if versions is None:
             raise Http404
         return versions
@@ -139,7 +139,7 @@ class SectionReaderView(TableOfContentsMixin, View):
         }
 
         client = api_reader.ApiReader()
-        toc = client.v2_toc(url_kwargs['version'], 42, url_kwargs['part'])['toc']
+        toc = client.toc(url_kwargs['version'], 42, url_kwargs['part'])['toc']
 
         subpart = find_subpart(kwargs.get("section"), toc)
         if subpart is not None:

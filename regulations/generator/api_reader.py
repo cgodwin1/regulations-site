@@ -33,19 +33,19 @@ class ApiReader(object):
     def __init__(self):
         self.cache = caches['api_cache']
 
-    def v2_effective_parts(self, date):
+    def effective_parts(self, date):
         return self._get("v2/{}".format(date))
 
-    def v2_part(self, date, title, part):
+    def part(self, date, title, part):
         return self._get("v2/{}/title/{}/part/{}".format(date, title, part))
 
-    def v2_toc(self, date, title, part):
+    def toc(self, date, title, part):
         return self._get("v2/{}/title/{}/part/{}/toc".format(date, title, part))
 
-    def v2_regversions(self, title, part):
+    def regversions(self, title, part):
         return self._get("v2/title/{}/part/{}".format(title, part))
 
-    def v2_search(self, query, **kwargs):
+    def search(self, query, **kwargs):
         """Search via the API. Never cache these (that's the duty of the search
         index)"""
         kwargs['q'] = query
