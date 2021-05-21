@@ -12,7 +12,7 @@ def internalcitation(value, arg):
     version = arg['version']
     citation_template = template.loader.get_template('regulations/layers/internal_citation.html')
     label = "-".join(arg['label'])
-    result = api_reader.ApiReader().layer("internal-citations", "cfr", label, version)
+    result = api_reader.ApiReader().layer("internal-citations", "cfr", label, version) ### BROKEN
     if result is not None and label in result:
         citations = result[label]
         citations.sort(key=lambda x: x["offsets"][0][0], reverse=True)
