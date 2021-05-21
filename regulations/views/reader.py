@@ -40,18 +40,13 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
             'versions':     versions,
         }
 
-        links = {}
-
-        return {**context, **c, **links}
+        return {**context, **c}
 
     def get_regulation(self, label_id, version):
         regulation = self.client.regulation(label_id, version)
         if regulation is None:
             raise Http404
         return regulation
-
-    def get_view_links(self, context, toc):
-        raise NotImplementedError()
 
     def get_versions(self, title, part):
         versions = self.client.regversions(title, part)
@@ -64,16 +59,6 @@ class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin
 
 
 class PartReaderView(ReaderView):
-    def get_view_links(self, context, toc):
-        return {}
-        part = context['part']
-        version = context['version']
-        first_subpart = utils.first_subpart(part, version)
-
-        return {
-            'subpart_view_link': reverse('reader_view', args=(part, first_subpart, version)),
-        }
-
     def build_toc_url(self, context, toc, node):
         return reverse('reader_view', args=(context['part'], context['version']))
 
@@ -82,20 +67,6 @@ class PartReaderView(ReaderView):
 
 
 class SubpartReaderView(ReaderView):
-    def get_view_links(self, context, toc):
-        part = context['part']
-        version = context['version']
-        subpart = context['subpart']
-
-        section = utils.find_subpart_first_section(subpart, toc)
-        if section is None:
-            section = utils.first_section(part, version)
-        citation = part + '-' + section
-
-        return {
-            'part_view_link': reverse('reader_view', args=(part, version)) + '#' + citation,
-        }
-
     def get_content(self, context, document, toc):
         # using tree['structure'] find subpart requested then extract that data
         subpart = context['subpart']
