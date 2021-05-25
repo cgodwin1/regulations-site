@@ -2,6 +2,8 @@
     Used once per section. Contained by subparts at the top level.
 {% endcomment %}
 
+{% load citation %}
+
 <section id="{{c.label | join:'-'}}" class="reg-section">
     <a class="reference" href="#{{c.label | join:'-'}}"><i class="fa fa-link"></i></a>
     {% if c.title %}
@@ -12,6 +14,9 @@
         {% endif %}
     {% endif %}
     {{c.text | safe}}
+    {% if c.Type == "Citation" %}
+        {{c.Content | citation}}
+    {% endif %}
 </section>
 
 {% for node in c.children %}
