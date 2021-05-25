@@ -7,13 +7,12 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 from regulations.generator import api_reader
-from regulations.views import utils
-from regulations.views.mixins import SidebarContextMixin, CitationContextMixin, TableOfContentsMixin
+from regulations.views.mixins import CitationContextMixin, TableOfContentsMixin
 from regulations.views.utils import find_subpart
 from regulations.views.errors import NotInSubpart
 
 
-class ReaderView(TableOfContentsMixin, SidebarContextMixin, CitationContextMixin, TemplateView):
+class ReaderView(TableOfContentsMixin, CitationContextMixin, TemplateView):
 
     template_name = 'regulations/reader.html'
 
