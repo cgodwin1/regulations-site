@@ -15,7 +15,7 @@ const Template = (args, { argTypes }) => ({
 
 export const Basic = Template.bind({});
 Basic.args = {
-    "direction": "up",
+    "direction": "vertical",
     "name": "default",
-    "collapsed": false,
+    "state": "expanded",
 };

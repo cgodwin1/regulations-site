@@ -13,12 +13,14 @@ export default {
     },
 
     created: function() {
-        
+        this.collapsed = this.state === "collapsed";
     },
 
     mounted: function() {
         this.$root.$on("collapse-toggle", this.toggle);
         this.$nextTick(() => {
+            this.width = this.$refs.target.clientWidth;
+            this.height = this.$refs.target.clientHeight;
             this.ready = true;
         });
     },
@@ -32,44 +34,68 @@ export default {
             type: String,
             required: true,
         },
-        collapsed: {
-            type: Boolean,
+        state: { //expanded or collapsed
+            type: String,
             required: true,
         },
     },
 
     computed: {
         renderedWidth: function() {
-            return this.ready ? (this.$refs.target.clientWidth + this.widthDifference) + "px" : "";
+            return this.ready ? (this.width + this.widthDifference) + "px" : "";
         },
         renderedHeight: function() {
-            return this.ready ? (this.$refs.target.clientHeight + this.heightDifference) + "px" : "";
+            return this.ready ? (this.height + this.heightDifference) + "px" : "";
         },
     },
 
     data: function() {
         return {
             display: "block",
-            start: -1.0,
+            lastTime: 0,
             ready: false,
+            width: 0,
+            height: 0,
             widthDifference: 0,
             heightDifference: 0,
+            collapsed: false,
         }
     },
 
     methods: {
         toggle: function(target) {
             if(this.name === target) {
-                
-                this.collapsed = !this.collapsed;
-                this.display = this.collapsed ? "none" : "block";
+                window.requestAnimationFrame(this.step);
+                //this.collapsed = !this.collapsed;
+                //this.display = this.collapsed ? "none" : "block";
             }
         },
-        stepLeft: function(delta) {
+        step: function(timestamp) {
+            let delta = this.calculateDelta(timestamp);
+            let movement = -1;
+            if(this.direction === "horizontal") {
+                movement = this.stepHorizontal(delta);
+            }
+            else if(this.direction === "vertical") {
+                movement = this.stepVertical(delta);
+            }
+            if(movement > 0) {
+                window.requestAnimationFrame(this.step);
+            }
+        },
+        calculateDelta: function(timestamp) {
+            let delta = timestamp - this.lastTime;
+            this.lastTime = timestamp;
+            return delta / 1000;
+        },
+        stepHorizontal: function(delta) {
 
         },
-        stepUp: function(delta) {
-
+        stepVertical: function(delta) {
+            let movement = 10 * delta * (this.collapsed ? 1 : -1);
+            this.heightDifference += movement;
+            console.log(this.heightDifference);
+            return Math.abs(movement);
         },
     },
 
