@@ -1,6 +1,6 @@
 <template>
-    <div class="collapse-button" v-bind:class="{ collapsed: collapsed }">
-        <button v-on:click="click">Press</button>
+    <div v-bind:class="{ visible: visible }">
+        <button v-on:click="click">{{ buttonText }}</button>
     </div>
 </template>
 
@@ -8,11 +8,8 @@
 export default {
     name: 'collapse-button',
 
-    components: {
-
-    },
-
     created: function() {
+        this.visible = this.state === "expanded";
         this.$root.$on("collapse-toggle", this.toggle);
     },
 
@@ -21,14 +18,32 @@ export default {
             type: String,
             required: true,
         },
-        collapsed: {
-            type: Boolean,
+        state: { //expanded or collapsed
+            type: String,
             required: true,
+        },
+        expanded_text: {
+            type: String,
+            required: false,
+            default: "Hide",
+        },
+        collapsed_text: {
+            type: String,
+            required: false,
+            default: "Show",
         },
     },
 
     computed: {
+        buttonText: function() {
+            return this.visible ? this.expanded_text : this.collapsed_text;
+        },
+    },
 
+    data: function() {
+        return {
+            visible: true,
+        }
     },
 
     methods: {
@@ -37,13 +52,9 @@ export default {
         },
         toggle: function(target) {
             if(this.name === target) {
-                this.collapsed = !this.collapsed;  
+                this.visible = !this.visible;
             }
         },
-    },
-
-    filters: {
-
     },
 };
 </script>
