@@ -1,5 +1,5 @@
 import RelatedRules from './RelatedRules.js';
-import VerticalCollapsible from './VerticalCollapsible.js';
+import Collapsible from './Collapsible.js';
 import CollapseButton from './CollapseButton.js';
 import Vue from "../../node_modules/vue/dist/vue.esm.browser.min.js";
 
@@ -26,7 +26,7 @@ function main() {
     new Vue({
         components: {
             RelatedRules,
-            VerticalCollapsible,
+            Collapsible,
             CollapseButton,
         }
     }).$mount("#vue-app")

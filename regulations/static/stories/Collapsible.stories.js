@@ -1,20 +1,21 @@
-import VerticalCollapsible from '../components/VerticalCollapsible.vue';
 import CollapseButton from '../components/CollapseButton.vue';
+import Collapsible from '../components/Collapsible.vue';
 
 export default {
   title: 'Site/Collapsible',
   component: CollapseButton,
-  subcomponents: { VerticalCollapsible },
+  subcomponents: { Collapsible },
 };
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { VerticalCollapsible, CollapseButton },
+  components: { CollapseButton, Collapsible },
   template: `
     <div>
       <collapse-button v-bind="$props" />
-      <vertical-collapsible name="default" state="collapsed">Hello, world!</vertical-collapsible>
+      <collapsible name="default" state="collapsed" direction="vertical">Hello, world!</collapsible>
       <hr />
+      <collapsible name="default" state="collapsed" direction="horizontal">Hello world in horizontal</collapsible>
     </div>`,
 });
 

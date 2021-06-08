@@ -24,10 +24,10 @@ export default [
         ],
     },
     {
-        input: 'components/VerticalCollapsible.vue',
+        input: 'components/Collapsible.vue',
         output: {
             format: 'esm',
-            file: 'regulations/js/VerticalCollapsible.js'
+            file: 'regulations/js/Collapsible.js'
         },
         plugins: [
             vue()

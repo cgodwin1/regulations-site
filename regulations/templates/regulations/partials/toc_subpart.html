@@ -18,9 +18,9 @@
         {% endif %}
     </div>
 
-    <vertical-collapsible state="{{ collapse_state }}" name="{{ item_subpart }}" transition="0.5s">
+    <collapsible state="{{ collapse_state }}" name="{{ item_subpart }}" transition="0.5s" direction="vertical">
         {% if item.children %}
             {% include "regulations/partials/toc_sub_toc.html" with type="subpart" %}
         {% endif %}
-    </vertical-collapsible>
+    </collapsible>
 </li>

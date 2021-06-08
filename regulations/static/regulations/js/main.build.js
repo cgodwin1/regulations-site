@@ -381,17 +381,24 @@
   //
 
   var script$1 = {
-      name: "vertical-collapsible",
+      name: "collapsible",
 
       created: function() {
           this.visible = this.state === "expanded";
+          this.isVertical = this.direction === "vertical";
           this.$root.$on("collapse-toggle", this.toggle);
+
       },
 
       mounted: function() {
+          window.addEventListener("resize", this.resize);
           this.$nextTick(() => {
-              this.computeHeight();
+              this.computeSize();
           });
+      },
+
+      destroyed: function() {
+          window.removeEventListener("resize", this.resize);
       },
 
       props: {
@@ -408,12 +415,17 @@
               required: false,
               default: "1s",
           },
+          direction: { //horizontal or vertical
+              type: String,
+              required: true,
+          },
       },
 
       data: function() {
           return {
-              height: 0,
+              size: 0,
               visible: true,
+              isVertical: true,
               styles: {
                   overflow: "hidden",
                   transition: this.transition,
@@ -421,23 +433,40 @@
           }
       },
 
+      computed: {
+          sizeStyle: function() {
+              return this.isVertical ? 
+                  { height: this.visible ? this.size : 0 } :
+                  { width: this.visible ? this.size : 0 };
+          }
+      },
+
       methods: {
+          resize: function(e) {
+              this.computeSize();
+          },
           toggle: function(target) {
               if(this.name === target) {
                   this.visible = !this.visible;
               }
           },
-          computeHeight: function() {
-              let setProps = (visibility, display, height, position) => {
+          computeSize: function() {
+              let setProps = (visibility, display, position, size) => {
                   this.$refs.target.style.visibility = visibility;
                   this.$refs.target.style.display = display;
-                  this.$refs.target.style.height = height;
                   this.$refs.target.style.position = position;
+                  if(this.isVertical) {
+                      this.$refs.target.style.height = size;
+                  }
+                  else {
+                      this.$refs.target.style.width = size;
+                  }
               };
+              let getStyle = () => { return window.getComputedStyle(this.$refs.target); };
 
-              setProps("hidden", "block", "auto", "absolute");
-              this.height = window.getComputedStyle(this.$refs.target).height;
-              setProps(null, null, 0, null);
+              setProps("hidden", "block", "absolute", "auto");
+              this.size = this.isVertical ? getStyle().height : getStyle().width;
+              setProps(null, null, null, 0);
           },
       },
   };
@@ -530,7 +559,7 @@
       {
         ref: "target",
         class: { visible: _vm.visible },
-        style: [_vm.styles, _vm.visible ? { height: _vm.height } : { height: 0 }]
+        style: [_vm.styles, _vm.sizeStyle]
       },
       [_vm._t("default")],
       2
@@ -773,7 +802,7 @@
       new yn({
           components: {
               RelatedRules: __vue_component__$3,
-              VerticalCollapsible: __vue_component__$1,
+              Collapsible: __vue_component__$1,
               CollapseButton: __vue_component__,
           }
       }).$mount("#vue-app");
