@@ -49,7 +49,6 @@ export default {
     methods: {
         toggle: function(target) {
             if(this.name === target) {
-                this.computeHeight();
                 this.visible = !this.visible;
             }
         },

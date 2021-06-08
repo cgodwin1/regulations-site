@@ -14334,16 +14334,16 @@ aside.left-sidebar .toc-section-name {
   font-weight: normal;
   font-size: 14px;
 }
-aside.left-sidebar .toc-toggles {
+aside.left-sidebar .subpart-toggle {
   width: 64px;
   display: table-cell;
 }
-aside.left-sidebar .toc-toggles:hover button {
+aside.left-sidebar .subpart-toggle:hover button {
   color: #fff;
   background: #205982;
   transition: all 0.1s ease-in;
 }
-aside.left-sidebar .toc-toggles button {
+aside.left-sidebar .subpart-toggle button {
   background: none;
   border: none;
   color: #A3E8FF;
@@ -14353,12 +14353,6 @@ aside.left-sidebar .toc-toggles button {
   padding: 16px;
   margin-right: 16px;
   border-radius: 3px;
-}
-aside.left-sidebar .toc-toggles button[data-set-state=expanded][data-state=expanded] {
-  display: none;
-}
-aside.left-sidebar .toc-toggles button[data-set-state=collapsed][data-state=collapsed] {
-  display: none;
 }
 aside.left-sidebar ul {
   padding: 0 0 16px 0;
@@ -14380,18 +14374,6 @@ aside.left-sidebar ul li a {
 aside.left-sidebar ul li.orphan .menu-section {
   margin-left: 16px;
   padding-left: 16px;
-}
-aside.left-sidebar ul li.subtoc {
-  transition-property: max-height;
-  transition-duration: 1s;
-  transition-timing-function: ease-in;
-  max-height: 250vh;
-}
-aside.left-sidebar ul li.subtoc.active {
-  background: #102E43;
-}
-aside.left-sidebar ul li.subtoc[data-state=collapsed] {
-  max-height: 0;
 }
 aside.left-sidebar a {
   color: #A3E8FF;

@@ -1,6 +1,9 @@
 <template>
     <div v-bind:class="{ visible: visible }">
-        <button v-on:click="click">{{ buttonText }}</button>
+        <button v-on:click="click">
+            <slot name="expanded" v-if="visible">Hide</slot>
+            <slot name="collapsed" v-if="!visible">Show</slot>
+        </button>
     </div>
 </template>
 
@@ -21,22 +24,6 @@ export default {
         state: { //expanded or collapsed
             type: String,
             required: true,
-        },
-        expanded_text: {
-            type: String,
-            required: false,
-            default: "Hide",
-        },
-        collapsed_text: {
-            type: String,
-            required: false,
-            default: "Show",
-        },
-    },
-
-    computed: {
-        buttonText: function() {
-            return this.visible ? this.expanded_text : this.collapsed_text;
         },
     },
 

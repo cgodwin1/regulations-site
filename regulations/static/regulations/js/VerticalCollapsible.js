@@ -6,7 +6,7 @@
 //
 
 var script = {
-    name: 'vertical-collapsible',
+    name: "vertical-collapsible",
 
     created: function() {
         this.visible = this.state === "expanded";
@@ -40,7 +40,7 @@ var script = {
             height: 0,
             visible: true,
             styles: {
-                overflow: 'hidden',
+                overflow: "hidden",
                 transition: this.transition,
             }
         }

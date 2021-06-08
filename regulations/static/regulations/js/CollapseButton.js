@@ -4,9 +4,12 @@
 //
 //
 //
+//
+//
+//
 
 var script = {
-    name: 'collapse-button',
+    name: "collapse-button",
 
     created: function() {
         this.visible = this.state === "expanded";
@@ -21,22 +24,6 @@ var script = {
         state: { //expanded or collapsed
             type: String,
             required: true,
-        },
-        expanded_text: {
-            type: String,
-            required: false,
-            default: "Hide",
-        },
-        collapsed_text: {
-            type: String,
-            required: false,
-            default: "Show",
-        },
-    },
-
-    computed: {
-        buttonText: function() {
-            return this.visible ? this.expanded_text : this.collapsed_text;
         },
     },
 
@@ -142,7 +129,16 @@ var __vue_render__ = function() {
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _c("div", { class: { visible: _vm.visible } }, [
-    _c("button", { on: { click: _vm.click } }, [_vm._v(_vm._s(_vm.buttonText))])
+    _c(
+      "button",
+      { on: { click: _vm.click } },
+      [
+        _vm.visible ? _vm._t("expanded", [_vm._v("Hide")]) : _vm._e(),
+        _vm._v(" "),
+        !_vm.visible ? _vm._t("collapsed", [_vm._v("Show")]) : _vm._e()
+      ],
+      2
+    )
   ])
 };
 var __vue_staticRenderFns__ = [];
