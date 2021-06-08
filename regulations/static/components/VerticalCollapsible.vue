@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'collapsible',
+    name: "vertical-collapsible",
 
     created: function() {
         this.visible = this.state === "expanded";
@@ -40,7 +40,7 @@ export default {
             height: 0,
             visible: true,
             styles: {
-                overflow: 'hidden',
+                overflow: "hidden",
                 transition: this.transition,
             }
         }
@@ -49,6 +49,7 @@ export default {
     methods: {
         toggle: function(target) {
             if(this.name === target) {
+                this.computeHeight();
                 this.visible = !this.visible;
             }
         },

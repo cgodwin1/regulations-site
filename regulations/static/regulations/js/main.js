@@ -1,4 +1,6 @@
 import RelatedRules from './RelatedRules.js';
+import VerticalCollapsible from './VerticalCollapsible.js';
+import CollapseButton from './CollapseButton.js';
 import Vue from "../../node_modules/vue/dist/vue.esm.browser.min.js";
 
 function makeStateful(el) {
@@ -24,8 +26,10 @@ function main() {
     new Vue({
         components: {
             RelatedRules,
+            VerticalCollapsible,
+            CollapseButton,
         }
-    }).$mount("#related-rules")
+    }).$mount("#vue-app")
 }
 
 main();

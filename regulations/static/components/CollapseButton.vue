@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'collapse-button',
+    name: "collapse-button",
 
     created: function() {
         this.visible = this.state === "expanded";
