@@ -16,13 +16,6 @@ function makeStateful(el) {
 }
 
 function main() {
-    const stateful_elements = document.querySelectorAll("[data-state]")
-
-    for (const el of stateful_elements) {
-        makeStateful(el);
-    }
-
-    
     new Vue({
         components: {
             RelatedRules,
@@ -30,6 +23,12 @@ function main() {
             CollapseButton,
         }
     }).$mount("#vue-app")
+
+    const stateful_elements = document.querySelectorAll("[data-state]")
+
+    for (const el of stateful_elements) {
+        makeStateful(el);
+    }
 }
 
 main();

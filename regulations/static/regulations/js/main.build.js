@@ -792,13 +792,6 @@
   }
 
   function main() {
-      const stateful_elements = document.querySelectorAll("[data-state]");
-
-      for (const el of stateful_elements) {
-          makeStateful(el);
-      }
-
-      
       new yn({
           components: {
               RelatedRules: __vue_component__$3,
@@ -806,6 +799,12 @@
               CollapseButton: __vue_component__,
           }
       }).$mount("#vue-app");
+
+      const stateful_elements = document.querySelectorAll("[data-state]");
+
+      for (const el of stateful_elements) {
+          makeStateful(el);
+      }
   }
 
   main();
