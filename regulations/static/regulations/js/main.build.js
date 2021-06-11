@@ -858,6 +858,16 @@
       }
   }
 
+  function viewButtonClose() {
+      const viewButton = document.querySelector("#view-button");
+      viewButton.addEventListener("click", function() {
+          if(this.getAttribute("data-state") === "show") {
+            const closeLink = document.querySelector('#close-link');
+            closeLink.click();
+          }
+      });
+  }
+
   function main() {
       new yn({
           components: {
@@ -871,7 +881,8 @@
       for (const el of stateful_elements) {
           makeStateful(el);
       }
-      
+
+      viewButtonClose();
       goToVersion();
 
       window.addEventListener("hashchange", activateTOCLink);
