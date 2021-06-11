@@ -19,8 +19,8 @@
                 <div class="search-context">This site searches Title 42: Parts 400, 430-460</div>
 
                 <form class="search-box" action="{% url 'search' %}">
-                    <input type=search name="q" placeholder="{{ q | default:'Search Regulations'}}"></input>
-                    <button type="reset" class="search-reset">
+                    <input id="search-field" type="text" name="q" placeholder="Search Regulations" value="{{ q }}"></input>
+                    <button type="button" class="search-reset" id="search-reset">
                         <i class="fa fa-times"></i>
                     </button>
                     <button type="submit" class="search-submit">
@@ -50,4 +50,8 @@
             <p>Search the entirety of Title 42, including other subchapters, in a different reg tool</p>
         </aside>
     </div>
+{% endblock %}
+
+{% block post_footer %}
+    <script src="{% static '/js/main.build.js' %}"></script>
 {% endblock %}
