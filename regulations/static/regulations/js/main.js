@@ -73,7 +73,6 @@ function main() {
     }).$mount("#vue-app")
 
     const stateful_elements = document.querySelectorAll("[data-state]")
-
     for (const el of stateful_elements) {
         makeStateful(el);
     }
@@ -83,6 +82,14 @@ function main() {
 
     window.addEventListener("hashchange", activateTOCLink);
     activateTOCLink();
+
+    let reset_button = document.getElementById("search-reset");
+    if(reset_button) {
+        reset_button.addEventListener("click", (event) => {
+            document.getElementById("search-field").value = '';
+            event.preventDefault();
+        });
+    }
 }
 
 main();
