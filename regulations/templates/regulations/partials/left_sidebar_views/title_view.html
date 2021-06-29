@@ -1,11 +1,29 @@
 {% for title in toc %}
-    <h1> {{ title.label }} </h1>
+    <li class="search-sidebar-element">
+        <h2>{{ title.label }}</h2>
+    </li>
+    
     {% for chapter in title.children %}
-        <h2> {{ chapter.label  }}</h2>
+        <li class="search-sidebar-element">
+            <h3>{{ chapter.label }}</h3>
+        </li>
+
         {% for subchapter in chapter.children %}
-            <h3> {{ subchapter.label }} </h3>
+            <li class="search-sidebar-element">
+                <h4>{{ subchapter.label }}</h4>
+            </li>
+
             {% for part in subchapter.children %}
-                <h4> {{ part.label }} </h4>
+                <li>
+                    <a class="subpart-info">
+                        <div class="toc-titles">
+                            <h3>
+                                <p class="subpart-letter">{{ part.label_level }}</p>
+                                <p class="subpart-name">{{ part.label_description }}</p>
+                            </h3>
+                        </div>
+                    </a>
+                </li>
             {% endfor %}
         {% endfor %}
     {% endfor %}
