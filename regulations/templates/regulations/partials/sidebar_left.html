@@ -28,23 +28,10 @@
 
         <input class="submit" type="submit" value="Go">
     </form>
-
 </div>
 
 <nav role="navigation">
     <ul>
-        {% for item in toc.children %}
-            {% if item.type == "section" %}
-                {% include "regulations/partials/toc_section.html" with extra_class="orphan" %}
-            {% elif item.type == "subpart" %}
-                {% with item_subpart="Subpart-"|add:item.identifier.0 %}
-                    {% if subpart and item_subpart == subpart %}
-                        {% include "regulations/partials/toc_subpart.html" with collapse_state="expanded" %}
-                    {% else %}
-                        {% include "regulations/partials/toc_subpart.html" with collapse_state="collapsed" %}
-                    {% endif %}
-                {% endwith %}
-            {% endif %}
-        {% endfor %}
+        {% include left_sidebar_content %}
     </ul>
 </nav>

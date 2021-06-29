@@ -1,0 +1,12 @@
+{% for title in toc %}
+    <h1> {{ title.label }} </h1>
+    {% for chapter in title.children %}
+        <h2> {{ chapter.label  }}</h2>
+        {% for subchapter in chapter.children %}
+            <h3> {{ subchapter.label }} </h3>
+            {% for part in subchapter.children %}
+                <h4> {{ part.label }} </h4>
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
