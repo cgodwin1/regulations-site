@@ -5,15 +5,13 @@
     <ul>
         {% for item in toc.children %}
             {% if item.type == "section" %}
-                {% include "regulations/partials/sidebar_left/subpart/section.html" with extra_class="orphan" %}
+                {% include "regulations/partials/sidebar_left/subpart/orphan_section.html" with extra_class="orphan" %}
             {% elif item.type == "subpart" %}
-                {% with item_subpart="Subpart-"|add:item.identifier.0 %}
-                    {% if subpart and item_subpart == subpart %}
-                        {% include "regulations/partials/sidebar_left/subpart/subpart.html" with collapse_state="expanded" %}
-                    {% else %}
-                        {% include "regulations/partials/sidebar_left/subpart/subpart.html" with collapse_state="collapsed" %}
-                    {% endif %}
-                {% endwith %}
+                {% if subpart and item.identifier.0 == subpart %}
+                    {% include "regulations/partials/sidebar_left/subpart/subpart.html" with collapse_state="expanded" %}
+                {% else %}
+                    {% include "regulations/partials/sidebar_left/subpart/subpart.html" with collapse_state="collapsed" %}
+                {% endif %}
             {% endif %}
         {% endfor %}
     </ul>
