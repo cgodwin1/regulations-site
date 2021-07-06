@@ -1,0 +1,20 @@
+{% extends "regulations/partials/sidebar_left/base.html" %}
+{% load static %}
+
+{% block navigation %}
+    <ul>
+        {% for item in toc.children %}
+            {% if item.type == "section" %}
+                {% include "regulations/partials/sidebar_left/subpart/section.html" with extra_class="orphan" %}
+            {% elif item.type == "subpart" %}
+                {% with item_subpart="Subpart-"|add:item.identifier.0 %}
+                    {% if subpart and item_subpart == subpart %}
+                        {% include "regulations/partials/sidebar_left/subpart/subpart.html" with collapse_state="expanded" %}
+                    {% else %}
+                        {% include "regulations/partials/sidebar_left/subpart/subpart.html" with collapse_state="collapsed" %}
+                    {% endif %}
+                {% endwith %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}

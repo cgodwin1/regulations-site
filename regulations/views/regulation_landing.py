@@ -40,7 +40,6 @@ class RegulationLandingView(TableOfContentsMixin, TemplateView):
             'reg_part': reg_part,
             'parts': parts,
             'last_updated': datetime.fromisoformat(current['last_updated']),
-            'left_sidebar_content': 'regulations/partials/left_sidebar_views/subpart_view.html',
             'content': [
                 'regulations/partials/landing_%s.html' % reg_part,
                 'regulations/partials/landing_default.html',

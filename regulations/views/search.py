@@ -22,7 +22,6 @@ class SearchView(TemplateView):
             'parts': parts,
             'toc': structure,
             'results': results,
-            'left_sidebar_content': 'regulations/partials/left_sidebar_views/title_view.html',
         }
         return {**context, **c, **self.request.GET.dict()}
 

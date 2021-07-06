@@ -39,7 +39,6 @@ class ReaderView(TableOfContentsMixin, CitationContextMixin, TemplateView):
             'toc':          toc,
             'parts':        parts,
             'versions':     versions,
-            'left_sidebar_content': 'regulations/partials/left_sidebar_views/subpart_view.html',
         }
 
         return {**context, **c}
